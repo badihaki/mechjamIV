@@ -18,28 +18,15 @@ public class PilotInteract : MonoBehaviour
 
     public void DetectInteract()
     {
-        RaycastHit2D ray = Physics2D.Raycast(interactStart.position, transform.forward, rayLength, LayerMask.GetMask());
+        RaycastHit2D ray = Physics2D.Raycast(interactStart.position, interactStart.right, rayLength, LayerMask.GetMask());
         Color rayColor = Color.white;
-        
-        if (ray.collider != null)
+
+        if (ray.collider)
         {
-            Debug.DrawRay(transform.position, transform.forward * rayLength, rayColor);
-            Debug.Log("searching");
-            if (ray.collider.name == "Body" && ray.collider.transform.parent != player._PilotCharacter)
-            {
-                IInteractable interactable = ray.collider.GetComponentInParent<IInteractable>();
-                if (interactable != null)
-                {
-                    rayColor = Color.green;
-                    print("hitting" + ray.transform.parent.name);
-                }
-                else
-                {
-                    if (activeInteractable != null) activeInteractable = null;
-                }
-            }
+            IInteractable interactable = ray.collider.GetComponentInParent<IInteractable>();
+            interactable?.Interact(player._PilotCharacter);
         }
-        Debug.DrawRay(transform.position, transform.forward * rayLength, rayColor);
+        Debug.DrawRay(interactStart.position, interactStart.right * rayLength, rayColor);
     }
 
     // end
