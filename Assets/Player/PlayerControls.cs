@@ -30,6 +30,7 @@ public class PlayerControls : MonoBehaviour
 
     public void OnInteract(InputValue value) => ProcessInteract(value.isPressed);
     private void ProcessInteract(bool input) => _InteractInput = input;
+    public void UseInteract() => _InteractInput = false;
 
     // end
 }

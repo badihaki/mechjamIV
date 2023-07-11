@@ -32,7 +32,7 @@ public class PilotAttack : MonoBehaviour
 
     public void AimWeapon(Vector2 aim)
     {
-        bool facingRight = pilot.player._Movement._IsFacingRight;
+        bool facingRight = pilot._Player._Movement._IsFacingRight;
         Vector3 targetRotation = Vector3.zero;
 
         if(aim.y > 0.35f)
@@ -60,7 +60,7 @@ public class PilotAttack : MonoBehaviour
         {
             attackTimer = _WeaponSheet.projectileFireRate;
             Projectile shot = Instantiate(_WeaponSheet.projectile, _Weapon.projectileSpawnPoint.position, _WeaponHolder.rotation);
-            shot.InitializeProjectile(pilot.player.transform, _WeaponSheet.projectileSpeed, _WeaponSheet.projectileDamage, _WeaponSheet.projectileForce);
+            shot.InitializeProjectile(pilot._Player.transform, _WeaponSheet.projectileSpeed, _WeaponSheet.projectileDamage, _WeaponSheet.projectileForce);
         }
     }
 
