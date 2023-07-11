@@ -24,6 +24,13 @@ public class Pilot_DashState : PC_State
         _Player._Effects.ActivateTrail();
     }
 
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        _Player._Interact.DetectInteract();
+    }
+
     public override void CheckInputs()
     {
         base.CheckInputs();

@@ -15,10 +15,12 @@ public class Player : MonoBehaviour, IDamageable
     [field: SerializeField] public Pilot _PilotCharacter { get; private set; }
     [field: SerializeField] public PilotLocomotion _Movement { get; private set; }
     [field: SerializeField] public PilotAttack _Attack { get; private set; }
-    [SerializeField] private WeaponScriptableObject _startingWeapon;
+    [field: SerializeField] public PilotInteract _Interact { get; private set; }
 
-    public PC_StateMachine _StateMachine { get; private set; }
     
+    [SerializeField] private WeaponScriptableObject _startingWeapon;
+    
+    public PC_StateMachine _StateMachine { get; private set; }
 
     private bool ready;
 
@@ -31,10 +33,18 @@ public class Player : MonoBehaviour, IDamageable
     public void InitializePlayer()
     {
         ready = false;
+
+        // controls
         _Controls = GetComponent<PlayerControls>();
+
+        // actually build the player
         BuildInGamePlayerCharacter();
+         
+        // build fx
         _Effects = GetComponent<PlayerEffects>();
         _Effects.InitializeEffects(_PilotCharacter);
+
+        // finally, health. used to track lives
         _Health = gameObject.AddComponent<Health>();
         _Health.SetLives();
     }
@@ -49,6 +59,9 @@ public class Player : MonoBehaviour, IDamageable
         
         _Attack = _PilotCharacter.gameObject.AddComponent<PilotAttack>();
         _Attack.Initialize(_PilotCharacter, _startingWeapon);
+
+        _Interact = _PilotCharacter.gameObject.AddComponent<PilotInteract>();
+        _Interact.Initialize(this);
 
         _StateMachine = new PC_StateMachine();
         _PilotCharacter.InitiatePilot(this);

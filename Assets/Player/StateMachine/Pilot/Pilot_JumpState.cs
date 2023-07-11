@@ -24,6 +24,7 @@ public class Pilot_JumpState : PC_State
     {
         base.LogicUpdate();
 
+        _Player._Interact.DetectInteract();
         if (attackInput) _Player._Attack.Attack();
     }
 

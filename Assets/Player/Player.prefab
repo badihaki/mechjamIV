@@ -49,11 +49,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <_Health>k__BackingField: {fileID: 0}
   <_Controls>k__BackingField: {fileID: 0}
+  <_Effects>k__BackingField: {fileID: 0}
   <_PilotSO>k__BackingField: {fileID: 11400000, guid: c9f28243c0b077a4fa856a276f2e1217,
     type: 2}
   <_PilotCharacter>k__BackingField: {fileID: 0}
   <_Movement>k__BackingField: {fileID: 0}
   <_Attack>k__BackingField: {fileID: 0}
+  <_Interact>k__BackingField: {fileID: 0}
   _startingWeapon: {fileID: 11400000, guid: 880be6eea3cc2144d9d81b2817edf829, type: 2}
 --- !u!114 &2208928151511200633
 MonoBehaviour:
@@ -146,3 +148,5 @@ MonoBehaviour:
   <_VisFX>k__BackingField:
   - {fileID: 5672416799096378889, guid: a13ff5d9cf27f534cb75f1e42d3e2ff4, type: 3}
   <_SoundFX>k__BackingField: []
+  <_Trail>k__BackingField: {fileID: 0}
+  _TrailMaterial: {fileID: 2100000, guid: 100ea2f0143e8384abdebd99e6bcc924, type: 2}
