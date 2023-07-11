@@ -38,16 +38,18 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        IDamageable damagedObj = collider.GetComponentInParent<IDamageable>();
-        if (damagedObj != null)
+        if (ready && collider.isTrigger == true)
         {
             Health target =  collider.GetComponentInParent<Health>();
-            
-            if (target.transform != projectileCreator)
+            if (target && target.transform != projectileCreator)
             {
-                damagedObj.Damage(transform, force, damage);
-                Instantiate(deathEffect, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                IDamageable damagedObj = target.GetComponent<IDamageable>();
+                if (damagedObj != null)
+                {
+                    damagedObj.Damage(transform, force, damage);
+                    Instantiate(deathEffect, transform.position, Quaternion.identity);
+                    Destroy(gameObject);
+                }
             }
         }
     }

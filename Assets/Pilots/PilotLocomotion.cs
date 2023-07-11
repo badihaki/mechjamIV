@@ -67,6 +67,8 @@ public class PilotLocomotion : MonoBehaviour
 
     public void ResetDashCount() => dashCount = player._PilotSO.maxDashCount;
 
+    public void Pushback(Vector2 direction) => _PhysicsController.AddForce(direction, ForceMode2D.Impulse);
+
     private void Flip()
     {
         transform.Rotate(0.0f, 180.0f, 0.0f);

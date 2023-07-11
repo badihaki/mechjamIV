@@ -21,14 +21,12 @@ public class Pilot_DeadState : PC_State
     {
         base.LogicUpdate();
 
-        Debug.Log("state running");
         if (Time.time >= _StateStartTime + 0.35f && isRespawning == false)
         {
             _Player._PilotCharacter.gameObject.AddComponent<Destroyer>();
             _Player.Respawn();
             _Player = null;
             isRespawning = true;
-            Debug.Log("Respawning");
         }
     }
 }

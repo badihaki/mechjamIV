@@ -35,27 +35,26 @@ public class Player : MonoBehaviour, IDamageable
         BuildInGamePlayerCharacter();
         _Effects = GetComponent<PlayerEffects>();
         _Effects.InitializeEffects(_PilotCharacter);
+        _Health = gameObject.AddComponent<Health>();
+        _Health.SetLives();
     }
 
     private void BuildInGamePlayerCharacter()
     {
         _PilotCharacter = Instantiate(_PilotSO.pilotGameObj, transform).GetComponent<Pilot>();
         _PilotCharacter.name = "Pilot-" + GetComponent<PlayerInput>().playerIndex;
+
         _Movement = _PilotCharacter.gameObject.AddComponent<PilotLocomotion>();
         _Movement.Initialize(this);
+        
         _Attack = _PilotCharacter.gameObject.AddComponent<PilotAttack>();
         _Attack.Initialize(_PilotCharacter, _startingWeapon);
-
-        _Health = gameObject.AddComponent<Health>();
-        _Health.SetLives();
 
         _StateMachine = new PC_StateMachine();
         _PilotCharacter.InitiatePilot(this);
         _StateMachine.InitializeStateMachine(_PilotCharacter._IdleState);
 
-        print(GameMaster.Instance);
         int index = UnityEngine.Random.Range(0, GameMaster.Instance.PlayerManager._PlayerSpawnPoints.Count - 1);
-        print("index is " + index + " out of the possible maximum of " + (GameMaster.Instance.PlayerManager._PlayerSpawnPoints.Count - 1));
         PilotSpawnPoint spawnPoint = GameMaster.Instance.PlayerManager._PlayerSpawnPoints[index];
 
         _PilotCharacter.transform.position = spawnPoint.transform.position;
@@ -82,15 +81,33 @@ public class Player : MonoBehaviour, IDamageable
     public void Damage(Transform origin, Vector2 force, int damage)
     {
         _StateMachine.ChangeState(_PilotCharacter._DeadState);
+
+        _Movement.Pushback(CalculatedPushback(origin, force));
+    }
+
+    private Vector2 CalculatedPushback(Transform origin, Vector2 force)
+    {
+        Vector2 pushback = Vector2.one;
+
+        // calculate x
+        if (origin.position.x > _PilotCharacter.transform.position.x) pushback.x = -1;
+        print("hit object x=" + _PilotCharacter.transform.position.x + " hit by object x=" + origin.position.x);
+        // calculate y
+        if (origin.position.y > _PilotCharacter.transform.position.y) pushback.y = -1;
+        print("hit object y=" + _PilotCharacter.transform.position.y + " hit by object y=" + origin.position.y);
+
+
+        pushback *= force;
+
+        return pushback;
     }
 
     public void Respawn()
     {
+        Destroy(_PilotCharacter.transform.Find("Hurtbox").gameObject);
         _PilotCharacter = null;
-        // ready = false;
         if (_Health.lives > 0)
         {
-            print("respawning");
             _Health.TakeALife();
             BuildInGamePlayerCharacter();
         }
