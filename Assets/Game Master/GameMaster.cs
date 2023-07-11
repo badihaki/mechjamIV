@@ -10,6 +10,8 @@ public class GameMaster : MonoBehaviour
     {
         if (Instance != null && Instance != this) Destroy(this.gameObject);
         else Instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame

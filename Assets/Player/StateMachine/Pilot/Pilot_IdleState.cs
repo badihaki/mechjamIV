@@ -18,6 +18,7 @@ public class Pilot_IdleState : PC_State
         base.Enter();
 
         _Player._Movement.StopMovement();
+        _Player._Movement.ResetDashCount();
     }
 
     public override void LogicUpdate()

@@ -12,7 +12,8 @@ public class PilotLocomotion : MonoBehaviour
 
     [field: SerializeField] public bool _IsFacingRight { get; private set; }
 
-    public float dashTimer { get; private set; }
+    [field: SerializeField] public float dashTimer { get; private set; }
+    [SerializeField] private int dashCount;
 
     // Start is called before the first frame update
     public void Initialize(Player _player)
@@ -56,12 +57,15 @@ public class PilotLocomotion : MonoBehaviour
 
     public void Dash(Vector2 direction)
     {
-        if (dashTimer <= 0)
+        if (dashTimer <= 0 && dashCount > 0)
         {
             dashTimer = player._PilotSO.dashTime;
+            dashCount--;
             _PhysicsController.velocity = new Vector2((transform.localScale.x * player._PilotSO.dashPower) * direction.x, (transform.localScale.y * player._PilotSO.dashPower) * direction.y);
         }
     }
+
+    public void ResetDashCount() => dashCount = player._PilotSO.maxDashCount;
 
     private void Flip()
     {

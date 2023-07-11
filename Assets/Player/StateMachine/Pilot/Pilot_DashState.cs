@@ -35,7 +35,7 @@ public class Pilot_DashState : PC_State
     {
         base.CheckTransitions();
 
-        if (Time.time > _StateStartTime + 0.50f)
+        if (Time.time > _StateStartTime + 0.185f)
         {
             if (_Player._Movement._CheckGrounded.IsGrounded()) _StateMachine.ChangeState(_Player._PilotCharacter._IdleState);
             else _StateMachine.ChangeState(_Player._PilotCharacter._FallingState);
@@ -48,5 +48,6 @@ public class Pilot_DashState : PC_State
 
         _Player._Movement._PhysicsController.gravityScale = originalGravity;
         _Player._Effects.DeactivateTrail();
+        _Player._Movement.StopMovement();
     }
 }

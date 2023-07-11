@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: 0
   m_EditorClassIdentifier: 
   pilotName: 00-proto
-  movementForce: {x: 5, y: 10}
   pilotGameObj: {fileID: 3408810428945411292, guid: b4d0d5ce61065754ca0b6f5fde926d0f,
     type: 3}
+  movementForce: {x: 5, y: 10}
+  dashPower: 25
+  dashTime: 1.75
+  maxDashCount: 2
