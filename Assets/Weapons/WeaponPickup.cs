@@ -9,8 +9,6 @@ public class WeaponPickup : MonoBehaviour, IInteractable
 
     public void Interact(Pilot pilot)
     {
-        print(pilot.name + " is interacting with " + name);
-
         if (pilot._Player._Controls._InteractInput)
         {
             pilot._Player._Controls.UseInteract();
