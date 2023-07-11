@@ -5,9 +5,21 @@ using UnityEngine;
 public class Destroyer : MonoBehaviour
 {
     [SerializeField] private float timeTillObjectIsDestroyed = 4.5f;
-    // Start is called before the first frame update
-    void Start()
+    private bool ready = false;
+
+    public void InitializeDestroyer(float time)
     {
+        timeTillObjectIsDestroyed = time;
+        ready = true;
         Destroy(gameObject, timeTillObjectIsDestroyed);
+    }
+
+    private void Start()
+    {
+        if (!ready)
+        {
+            Destroy(gameObject, timeTillObjectIsDestroyed);
+            ready = true;
+        }
     }
 }

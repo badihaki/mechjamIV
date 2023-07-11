@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour, IInteractable
+public class WeaponPickup : MonoBehaviour, IInteractable
 {
     [field: SerializeField] public bool _CanInteract { get; set; }
+    [field: SerializeField] public WeaponScriptableObject _Weapon { get; private set; }
 
     public void Interact(Pilot pilot)
     {
@@ -12,9 +13,10 @@ public class Item : MonoBehaviour, IInteractable
 
         if (pilot._Player._Controls._InteractInput)
         {
-            print("*** " + pilot.name + " interacted with item " + name + " ***");
             pilot._Player._Controls.UseInteract();
+            pilot._Player._Attack.SwitchWeapon(_Weapon);
             _CanInteract = false;
+            Destroy(gameObject);
         }
     }
 
@@ -22,11 +24,12 @@ public class Item : MonoBehaviour, IInteractable
     void Start()
     {
         _CanInteract = true;
+        transform.Find("GFX").GetComponent<SpriteRenderer>().sprite = _Weapon.pickupGraphic;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -19,9 +19,7 @@ public class PilotAttack : MonoBehaviour
 
         _WeaponHolder = transform.Find("Weapon Holder");
         _WeaponSheet = _startingWeapon;
-
-        _Weapon = Instantiate(_WeaponSheet.weaponGameObj, _WeaponHolder).GetComponent<Weapon>();
-        _Weapon.BuildWeaponInstance(_WeaponHolder, GetComponent<Pilot>());
+        EquipNewWeapon();
     }
 
     // Update is called once per frame
@@ -68,6 +66,37 @@ public class PilotAttack : MonoBehaviour
     {
         if (attackTimer > 0.0f) attackTimer -= Time.deltaTime;
         else if (attackTimer <= 0.0f) attackTimer = 0.0f;
+    }
+
+    public void SwitchWeapon(WeaponScriptableObject newWeapon)
+    {
+        ThrowAwayOldWeapon();
+        UnequipWeapon();
+        _WeaponSheet = newWeapon;
+        EquipNewWeapon();
+    }
+
+    private void EquipNewWeapon()
+    {
+        _Weapon = Instantiate(_WeaponSheet.weaponGameObj, _WeaponHolder).GetComponent<Weapon>();
+        _Weapon.BuildWeaponInstance(_WeaponHolder, GetComponent<Pilot>());
+    }
+
+    public void UnequipWeapon()
+    {
+        _WeaponSheet = null;
+        Destroy(_Weapon);
+    }
+
+    private void ThrowAwayOldWeapon()
+    {
+        GameObject pickup = Instantiate(_WeaponSheet.weaponPickup, new Vector2(transform.position.x, transform.position.y + 1.35f), Quaternion.identity);
+        Vector2 force = Vector2.one;
+        force.x = Random.Range(2.5f, 5.5f);
+        force.y = Random.Range(4.35f, 6.85f);
+        pickup.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+        Destroyer destroyer = pickup.AddComponent<Destroyer>();
+        destroyer.InitializeDestroyer(6.35f);
     }
 
     // end

@@ -322,7 +322,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fd7888643e2d33e46a9ffe2ae40e05bd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -347,4 +347,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <_PilotCharacterSheet>k__BackingField: {fileID: 11400000, guid: c9f28243c0b077a4fa856a276f2e1217,
     type: 2}
-  <player>k__BackingField: {fileID: 0}
+  <_Player>k__BackingField: {fileID: 0}

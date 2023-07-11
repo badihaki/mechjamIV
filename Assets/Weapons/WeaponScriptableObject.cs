@@ -11,4 +11,6 @@ public class WeaponScriptableObject : ScriptableObject
     public float projectileSpeed;
     public int projectileDamage;
     public float projectileForce;
+    public Sprite pickupGraphic;
+    public GameObject weaponPickup;
 }
