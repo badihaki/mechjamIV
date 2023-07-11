@@ -25,10 +25,10 @@ public class Player : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        InitializePlayer();
+        // InitializePlayer();
     }
 
-    private void InitializePlayer()
+    public void InitializePlayer()
     {
         ready = false;
         _Controls = GetComponent<PlayerControls>();
@@ -52,6 +52,13 @@ public class Player : MonoBehaviour, IDamageable
         _StateMachine = new PC_StateMachine();
         _PilotCharacter.InitiatePilot(this);
         _StateMachine.InitializeStateMachine(_PilotCharacter._IdleState);
+
+        print(GameMaster.Instance);
+        int index = UnityEngine.Random.Range(0, GameMaster.Instance.PlayerManager._PlayerSpawnPoints.Count - 1);
+        print("index is " + index + " out of the possible maximum of " + (GameMaster.Instance.PlayerManager._PlayerSpawnPoints.Count - 1));
+        PilotSpawnPoint spawnPoint = GameMaster.Instance.PlayerManager._PlayerSpawnPoints[index];
+
+        _PilotCharacter.transform.position = spawnPoint.transform.position;
 
         ready = true;
     }

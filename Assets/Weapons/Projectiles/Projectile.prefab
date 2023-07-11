@@ -53,6 +53,8 @@ MonoBehaviour:
   projectileCreator: {fileID: 0}
   physicsController: {fileID: 0}
   ready: 0
+  deathEffect: {fileID: 154122213188790330, guid: 76a26c1446c9b9f4698592a3bfc3ef83,
+    type: 3}
 --- !u!50 &1387261907296786219
 Rigidbody2D:
   serializedVersion: 4

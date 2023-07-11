@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] private bool ready = false;
 
+    [SerializeField] private ParticleSystem deathEffect;
+
     public void InitializeProjectile(Transform _origin, float _speed, int _dmg, float _force)
     {
         speed = _speed;
@@ -44,6 +46,8 @@ public class Projectile : MonoBehaviour
             if (target.transform != projectileCreator)
             {
                 damagedObj.Damage(transform, force, damage);
+                Instantiate(deathEffect, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,20 +6,31 @@ using UnityEngine.InputSystem;
 
 public class GM_PlayerManager : MonoBehaviour
 {
-    public static GM_PlayerManager Instance { get; private set; }
-
     [field:SerializeField] public List<Player> _PlayerList { get; private set; }
+    [field: SerializeField] public List<PilotSpawnPoint> _PlayerSpawnPoints { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) Destroy(this.gameObject);
-        else Instance = this;
+        _PlayerList = new List<Player>();
+        _PlayerSpawnPoints = new List<PilotSpawnPoint>();
+        PopulateSpawnPointList();
     }
 
-    public void OnPlayerJoined(PlayerInput player)
+    public void PopulateSpawnPointList()
     {
-        print("player joined" + player.playerIndex);
+        PilotSpawnPoint[] spawnPoints = FindObjectsByType<PilotSpawnPoint>(FindObjectsSortMode.None);
+        foreach (var spawnPoint in spawnPoints)
+        {
+            _PlayerSpawnPoints.Add(spawnPoint);
+        }
+    }
 
-        _PlayerList.Add(player.GetComponent<Player>());
+    public void OnPlayerJoined(PlayerInput playerInput)
+    {
+        print("player joined" + playerInput.playerIndex);
+
+        Player player = playerInput.GetComponent<Player>();
+        _PlayerList.Add(player);
+        player.InitializePlayer();
     }
 }
