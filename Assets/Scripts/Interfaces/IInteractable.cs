@@ -6,6 +6,6 @@ public interface IInteractable
 {
     bool _CanInteract { get; set; }
 
-    void Interact(Pilot pilot);
+    void InteractionAccess(Pilot pilot);
 
 }

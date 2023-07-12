@@ -7,7 +7,7 @@ public class WeaponPickup : MonoBehaviour, IInteractable
     [field: SerializeField] public bool _CanInteract { get; set; }
     [field: SerializeField] public WeaponScriptableObject _Weapon { get; private set; }
 
-    public void Interact(Pilot pilot)
+    public void InteractionAccess(Pilot pilot)
     {
         if (pilot._Player._Controls._InteractInput)
         {

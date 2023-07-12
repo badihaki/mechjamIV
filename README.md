@@ -38,6 +38,7 @@ A paltform fighter made for MechJam IV. Made in Unity3D
 		* Dash
 		* Attack (3)
 		* Air Attack
+	* Effects
 * UI
 	* Dash cooldown
 	* Weapon ammo
@@ -56,6 +57,8 @@ A paltform fighter made for MechJam IV. Made in Unity3D
 * Pilot death
 * Mech hit
 * Mech explosion
+* Pilot Jump
+* Mech Jump
 
 ### Narrative
 * What is the narrative?

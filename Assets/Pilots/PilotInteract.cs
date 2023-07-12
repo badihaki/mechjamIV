@@ -26,7 +26,7 @@ public class PilotInteract : MonoBehaviour
             IInteractable interactable = ray.collider.GetComponentInParent<IInteractable>();
             if (interactable != null)
             {
-                if (interactable._CanInteract == true) interactable.Interact(player._PilotCharacter);
+                if (interactable._CanInteract == true) interactable.InteractionAccess(player._PilotCharacter);
             }
         }
         Debug.DrawRay(interactStart.position, interactStart.right * rayLength, rayColor);

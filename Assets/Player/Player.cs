@@ -6,16 +6,17 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour, IDamageable
 {
-    [field: SerializeField] public Health _Health { get; private set; }
-    [field: SerializeField] public PlayerControls _Controls { get; private set; }
-    [field: SerializeField] public PlayerEffects _Effects { get; private set; }
+    public Health _Health { get; private set; }
+    public PlayerControls _Controls { get; private set; }
+    public PlayerEffects _Effects { get; private set; }
 
     // pilot stuff
     [field: SerializeField] public PilotScriptableObject _PilotSO { get; private set; }
-    [field: SerializeField] public Pilot _PilotCharacter { get; private set; }
-    [field: SerializeField] public PilotLocomotion _Movement { get; private set; }
-    [field: SerializeField] public PilotAttack _Attack { get; private set; }
-    [field: SerializeField] public PilotInteract _Interact { get; private set; }
+    public Pilot _PilotCharacter { get; private set; }
+    public PilotLocomotion _Movement { get; private set; }
+    public PilotAttack _Attack { get; private set; }
+    public PilotInteract _Interact { get; private set; }
+    public PilotMech _Mech { get; private set; }
 
     
     [SerializeField] private WeaponScriptableObject _startingWeapon;
@@ -62,6 +63,9 @@ public class Player : MonoBehaviour, IDamageable
 
         _Interact = _PilotCharacter.gameObject.AddComponent<PilotInteract>();
         _Interact.Initialize(this);
+
+        _Mech = _PilotCharacter.gameObject.AddComponent<PilotMech>();
+        _Mech.Initialize(_PilotCharacter);
 
         _StateMachine = new PC_StateMachine();
         _PilotCharacter.InitiatePilot(this);

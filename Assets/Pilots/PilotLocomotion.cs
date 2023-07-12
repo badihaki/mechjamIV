@@ -74,4 +74,9 @@ public class PilotLocomotion : MonoBehaviour
         transform.Rotate(0.0f, 180.0f, 0.0f);
         _IsFacingRight = !_IsFacingRight;
     }
+
+    internal void Eject()
+    {
+        _PhysicsController.AddForce(new Vector2(0.0f, 12.50f), ForceMode2D.Impulse);
+    }
 }

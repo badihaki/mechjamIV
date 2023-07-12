@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Pilot : MonoBehaviour
 {
-    [field: SerializeField] public PilotScriptableObject _PilotCharacterSheet { get; private set; }
-    [field: SerializeField] public Player _Player { get; private set; }
+    public Player _Player { get; private set; }
+    public GameObject _Body { get; private set; }
 
     // States listed below
     public Pilot_IdleState _IdleState { get; private set; }
@@ -14,10 +14,14 @@ public class Pilot : MonoBehaviour
     public Pilot_FallingState _FallingState { get; private set; }
     public Pilot_DashState _DashState { get; private set; }
     public Pilot_DeadState _DeadState { get; private set; }
+    public PilotEmbarkState _EmbarkState { get; private set; }
+    public PilotRidingMechState _RidingMechState { get; private set; }
+    public PilotDisembarkState _DisembarkState { get; private set; }
     
     public void InitiatePilot(Player _player)
     {
         _Player = _player;
+        _Body = transform.Find("Body").gameObject;
 
         BuildStates();
     }
@@ -29,6 +33,11 @@ public class Pilot : MonoBehaviour
         _FallingState = new Pilot_FallingState(_Player, _Player._StateMachine, "air");
         _DashState = new Pilot_DashState(_Player, _Player._StateMachine, "dash");
         _DeadState = new Pilot_DeadState(_Player, _Player._StateMachine, "dead");
+
+        // vehicle states
+        _EmbarkState = new PilotEmbarkState(_Player, _Player._StateMachine, "vehicle");
+        _RidingMechState = new PilotRidingMechState(_Player, _Player._StateMachine, "vehicle");
+        _DisembarkState = new PilotDisembarkState(_Player, _Player._StateMachine, "air");
     }
 
     // Update is called once per frame

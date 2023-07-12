@@ -6,7 +6,7 @@ public class Item : MonoBehaviour, IInteractable
 {
     [field: SerializeField] public bool _CanInteract { get; set; }
 
-    public void Interact(Pilot pilot)
+    public void InteractionAccess(Pilot pilot)
     {
         print(pilot.name + " is interacting with " + name);
 
