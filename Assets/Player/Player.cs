@@ -25,12 +25,6 @@ public class Player : MonoBehaviour, IDamageable
 
     private bool ready;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // InitializePlayer();
-    }
-
     public void InitializePlayer()
     {
         ready = false;
@@ -123,7 +117,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         Destroy(_PilotCharacter.transform.Find("Hurtbox").gameObject);
         _PilotCharacter = null;
-        if (_Health.lives > 0)
+        if (_Health._Lives > 0)
         {
             _Health.TakeALife();
             BuildInGamePlayerCharacter();

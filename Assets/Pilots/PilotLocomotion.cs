@@ -13,7 +13,7 @@ public class PilotLocomotion : MonoBehaviour
     [field: SerializeField] public bool _IsFacingRight { get; private set; }
 
     [field: SerializeField] public float dashTimer { get; private set; }
-    [SerializeField] private int dashCount;
+    [field:SerializeField] public int dashCount { get; private set; }
 
     // Start is called before the first frame update
     public void Initialize(Player _player)
