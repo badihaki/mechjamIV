@@ -1,6 +1,18 @@
 # mechjamIV
 A paltform fighter made for MechJam IV. Made in Unity3D
 
+## Controls
+Controls will be listed as KBM || Gamepad
+* Move - Arrows Keys || Left Thumb Stick
+* Jump - Space || Bottom Face Buttom
+* Interact - F || Right Face Button
+* Attack - A || Right Trigger
+* Dash - Left Shift || Left Trigger
+* Start - Enter || Start Button
+
+## How To Play
+You will enter a test room with a mech (the cube) and a weapon pickup. You can press 'Start' to spawn a player. Up to two players can be spawned.
+
 ## Todo
 
 ### Gameplay

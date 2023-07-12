@@ -41,6 +41,11 @@ public class PC_State
 
     public virtual void PhysicsUpdate()
     {
+        CheckGround();
+    }
+
+    public virtual void CheckGround()
+    {
         grounded = _Player._Movement._CheckGrounded.IsGrounded();
     }
 

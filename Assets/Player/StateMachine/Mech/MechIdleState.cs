@@ -23,7 +23,11 @@ public class MechIdleState : PC_State
         base.CheckInputs();
 
         moveInput = _Player._Controls._MoveInput;
-        Debug.Log("move input: " + moveInput.x);
+    }
+
+    public override void CheckGround()
+    {
+        grounded = _Player._MechController._Mech._Movement._CheckGrounded.IsGrounded();
     }
 
     public override void CheckTransitions()

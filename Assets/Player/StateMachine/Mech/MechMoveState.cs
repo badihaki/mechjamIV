@@ -31,6 +31,11 @@ public class MechMoveState : PC_State
         _Player._MechController._Mech._Movement.MoveCharacterHorizontal(moveInput.x);
     }
 
+    public override void CheckGround()
+    {
+        grounded = _Player._MechController._Mech._Movement._CheckGrounded.IsGrounded();
+    }
+
     public override void CheckTransitions()
     {
         base.CheckTransitions();

@@ -8,7 +8,7 @@ public class PilotLocomotion : MonoBehaviour
     private Player player;
     public Rigidbody2D _PhysicsController { get; private set; }
     private Vector2 moveForces;
-    public CheckForGround _CheckGrounded { get; private set; }
+    [field: SerializeField] public CheckForGround _CheckGrounded { get; private set; }
 
     [field: SerializeField] public bool _IsFacingRight { get; private set; }
 

@@ -16,9 +16,9 @@ public class Mech : MonoBehaviour, IInteractable
     public MechIdleState _IdleState { get; private set; }
     public MechMoveState _MoveState { get; private set; }
 
+
     public void InteractionAccess(Pilot pilot)
     {
-        print("interacting with a mech");
         if (pilot._Player._Controls._InteractInput)
         {
             pilot._Player._Controls.UseInteract();
@@ -54,7 +54,11 @@ public class Mech : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        if (!_CanInteract) _MechStateMachine.currentState.LogicUpdate();
+    }
+    private void FixedUpdate()
+    {
+        if (!_CanInteract) _MechStateMachine.currentState.PhysicsUpdate();
     }
 
     public void GetInTheRobot(Pilot pilot)

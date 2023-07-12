@@ -8,11 +8,13 @@ public class MechLocomotion : MonoBehaviour
     public Rigidbody2D _PhysicsController { get; private set; }
     public bool _IsFacingRight { get; private set; }
     private Vector2 moveForces;
+    public CheckForGround _CheckGrounded { get; private set; }
 
 
     public void Initialize(Mech mecha)
     {
         mech = mecha;
+        _CheckGrounded = gameObject.AddComponent<CheckForGround>();
 
         _PhysicsController = GetComponent<Rigidbody2D>();
         moveForces = mech._MechCharacterSheet.movementForce;
