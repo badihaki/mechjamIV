@@ -16,24 +16,22 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 ## Todo
 
 ### Gameplay
-* Player State Machine - EmbarkMech -> RidingMech -> DisembarkMech
 * Player ammo management
 * Mech
 	* State Machine
-		* Inactive
-		* Idle
-		* Move
 		* Jump
 		* Dash
 		* Attacks
 			* 3 hit on ground
 			* 1 Air attack
+	* Fuel mechanic
 * Gameplay Loop
 	* Start screen
 	* Character Select
 	* Match
 	* Match end
 * Hitstop
+* Fuel and Ammo pickups
 * Tutorial
 	
 ### Art
@@ -77,7 +75,8 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 	* Player motivations?
 
 ## Implemented Features
-### Player
+
+### Pilot
 * Full State Machine
 	* Idle
 	* Move
@@ -85,8 +84,16 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 	* Falling
 	* Dead
 	* Dashing
+	* EmbarkMech
+	* RidingMech
+	* DisembarkMech
 * Can shoot
 * Can switch weapons
+### Mech
+* State Machine
+	* Inactive
+	* Idle
+	* Move
 ### Weapons
 * Weapon implement
 * Weapon pickups
