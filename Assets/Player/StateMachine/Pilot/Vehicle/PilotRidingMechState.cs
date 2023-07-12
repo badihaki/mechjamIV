@@ -10,11 +10,21 @@ public class PilotRidingMechState : PC_State
 
     protected bool interactInput;
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        _Player._MechController._Mech._MechStateMachine.ChangeState(_Player._MechController._Mech._IdleState);
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        _Player._Mech.KeepPilotInMech();
+        if (!_IsExitingState)
+        {
+            _Player._MechController.KeepPilotInMech();
+        }
     }
 
     public override void CheckInputs()

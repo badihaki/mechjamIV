@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class PilotMech : MonoBehaviour
 {
-    public Pilot pilot { get; private set; }
-    public Mech mech;
+    public Pilot _Pilot { get; private set; }
+    public Mech _Mech;
 
     public void Initialize(Pilot pilotCharacter)
     {
-        pilot = pilotCharacter;
+        _Pilot = pilotCharacter;
     }
 
-    public void KeepPilotInMech() => pilot.transform.position = mech.transform.position;
+    public void KeepPilotInMech() => _Pilot.transform.position = _Mech.transform.position;
 
-    public void GetNewMech(Mech newMech) => mech = newMech;
-    public void DiscardMech() => mech = null;
+    public void GetNewMech(Mech newMech) => _Mech = newMech;
+    public void DiscardMech() => _Mech = null;
 
     // end
 }

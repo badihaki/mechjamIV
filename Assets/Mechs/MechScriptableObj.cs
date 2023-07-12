@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MechScriptableObj : MonoBehaviour
+[CreateAssetMenu(fileName = "Mech", menuName = "Create Content/Create New Mech")]
+public class MechScriptableObj : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Basic stuff")]
+    public GameObject mechGameObj;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Stats")]
+    public Vector2 movementForce;
+    public float dashPower;
+    public float dashTime;
 }

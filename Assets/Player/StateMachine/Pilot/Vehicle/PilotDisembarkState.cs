@@ -12,9 +12,10 @@ public class PilotDisembarkState : PC_State
     {
         base.Enter();
 
-        _Player._Mech.DiscardMech();
+        _Player._MechController.DiscardMech();
         _Player._Movement._PhysicsController.bodyType = RigidbodyType2D.Dynamic;
         _Player._Movement.Eject();
+        _Player._MechController._Mech.GetOutTheRobot();
     }
 
     public override void Exit()

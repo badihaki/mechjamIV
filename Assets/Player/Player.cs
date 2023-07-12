@@ -16,7 +16,7 @@ public class Player : MonoBehaviour, IDamageable
     public PilotLocomotion _Movement { get; private set; }
     public PilotAttack _Attack { get; private set; }
     public PilotInteract _Interact { get; private set; }
-    public PilotMech _Mech { get; private set; }
+    public PilotMech _MechController { get; private set; }
 
     
     [SerializeField] private WeaponScriptableObject _startingWeapon;
@@ -64,8 +64,8 @@ public class Player : MonoBehaviour, IDamageable
         _Interact = _PilotCharacter.gameObject.AddComponent<PilotInteract>();
         _Interact.Initialize(this);
 
-        _Mech = _PilotCharacter.gameObject.AddComponent<PilotMech>();
-        _Mech.Initialize(_PilotCharacter);
+        _MechController = _PilotCharacter.gameObject.AddComponent<PilotMech>();
+        _MechController.Initialize(_PilotCharacter);
 
         _StateMachine = new PC_StateMachine();
         _PilotCharacter.InitiatePilot(this);

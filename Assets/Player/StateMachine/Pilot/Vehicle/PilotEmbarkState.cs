@@ -13,6 +13,7 @@ public class PilotEmbarkState : PC_State
         base.Enter();
 
         // _Player._Movement._PhysicsController.isKinematic = true;
+        _Player._Movement.StopMovement();
         _Player._Movement._PhysicsController.bodyType = RigidbodyType2D.Kinematic;
         _Player._PilotCharacter._Body.SetActive(false);
     }

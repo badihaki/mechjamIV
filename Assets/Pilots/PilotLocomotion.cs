@@ -36,6 +36,11 @@ public class PilotLocomotion : MonoBehaviour
         if (dashTimer > 0) dashTimer -= Time.deltaTime;
         else if (dashTimer <= 0) dashTimer = 0;
     }
+    
+    public void StopMovement()
+    {
+        _PhysicsController.velocity = Vector2.zero;
+    }
 
     public void MoveCharacterHorizontal(float direction)
     {
@@ -48,11 +53,6 @@ public class PilotLocomotion : MonoBehaviour
     public void JumpCharacter()
     {
         _PhysicsController.AddForce(new Vector2(_PhysicsController.velocity.x / 2, player._PilotSO.movementForce.y), ForceMode2D.Impulse);
-    }
-
-    public void StopMovement()
-    {
-        _PhysicsController.velocity = Vector2.zero;
     }
 
     public void Dash(Vector2 direction)

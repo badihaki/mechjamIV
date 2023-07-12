@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0132f5caee20aec48ae6d3212aa37507, type: 3}
+  m_Name: 0
+  m_EditorClassIdentifier: 
+  mechGameObj: {fileID: 6041200689932936600, guid: e09944ef98bf8c148af9e20d8e9c6aa9,
+    type: 3}
+  movementForce: {x: 7.5, y: 15}
+  dashPower: 10
+  dashTime: 3.5
