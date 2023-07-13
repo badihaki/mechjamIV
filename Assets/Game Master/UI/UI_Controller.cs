@@ -22,7 +22,7 @@ public class UI_Controller : MonoBehaviour
     {
         battleUIObj?.SetActive(true);
 
-        _BattleUI.AddPlayers(GameMaster.Instance.PlayerManager._PlayerList.ToArray());
+        // _BattleUI.AddPlayers(GameMaster.Instance.PlayerManager._PlayerList.ToArray());
     }
         
 

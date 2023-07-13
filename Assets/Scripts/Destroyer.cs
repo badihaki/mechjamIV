@@ -11,14 +11,14 @@ public class Destroyer : MonoBehaviour
     {
         timeTillObjectIsDestroyed = time;
         ready = true;
-        Destroy(gameObject, timeTillObjectIsDestroyed);
+        Destroy(this.gameObject, timeTillObjectIsDestroyed);
     }
 
     private void Start()
     {
         if (!ready)
         {
-            Destroy(gameObject, timeTillObjectIsDestroyed);
+            Destroy(this.gameObject, timeTillObjectIsDestroyed);
             ready = true;
         }
     }

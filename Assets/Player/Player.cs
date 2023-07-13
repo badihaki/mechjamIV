@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour, IDamageable
 {
     public Health _Health { get; private set; }
+    [SerializeField] private int playerIndex;
     public PlayerControls _Controls { get; private set; }
     public PlayerEffects _Effects { get; private set; }
 
@@ -31,23 +32,23 @@ public class Player : MonoBehaviour, IDamageable
 
         // controls
         _Controls = GetComponent<PlayerControls>();
+         
+        _Effects = GetComponent<PlayerEffects>();
 
         // actually build the player
         BuildInGamePlayerCharacter();
-         
-        // build fx
-        _Effects = GetComponent<PlayerEffects>();
-        _Effects.InitializeEffects(_PilotCharacter);
 
         // finally, health. used to track lives
         _Health = gameObject.AddComponent<Health>();
         _Health.SetLives();
+
+        playerIndex = GetComponent<PlayerInput>().playerIndex;
     }
 
     private void BuildInGamePlayerCharacter()
     {
         _PilotCharacter = Instantiate(_PilotSO.pilotGameObj, transform).GetComponent<Pilot>();
-        _PilotCharacter.name = "Pilot-" + GetComponent<PlayerInput>().playerIndex;
+        _PilotCharacter.name = "Pilot-" + playerIndex;
 
         _Movement = _PilotCharacter.gameObject.AddComponent<PilotLocomotion>();
         _Movement.Initialize(this);
@@ -60,6 +61,8 @@ public class Player : MonoBehaviour, IDamageable
 
         _MechController = _PilotCharacter.gameObject.AddComponent<PilotMech>();
         _MechController.Initialize(_PilotCharacter);
+
+        _Effects.InitializeEffects(_PilotCharacter);
 
         _StateMachine = new PC_StateMachine();
         _PilotCharacter.InitiatePilot(this);
@@ -94,6 +97,7 @@ public class Player : MonoBehaviour, IDamageable
         _StateMachine.ChangeState(_PilotCharacter._DeadState);
 
         _Movement.Pushback(CalculatedPushback(origin, force));
+        
     }
 
     private Vector2 CalculatedPushback(Transform origin, Vector2 force)
@@ -102,10 +106,8 @@ public class Player : MonoBehaviour, IDamageable
 
         // calculate x
         if (origin.position.x > _PilotCharacter.transform.position.x) pushback.x = -1;
-        print("hit object x=" + _PilotCharacter.transform.position.x + " hit by object x=" + origin.position.x);
         // calculate y
         if (origin.position.y > _PilotCharacter.transform.position.y) pushback.y = -1;
-        print("hit object y=" + _PilotCharacter.transform.position.y + " hit by object y=" + origin.position.y);
 
 
         pushback *= force;
@@ -120,6 +122,10 @@ public class Player : MonoBehaviour, IDamageable
         if (_Health._Lives > 0)
         {
             _Health.TakeALife();
+            if (GameMaster.Instance._UI._BattleUI.isActiveAndEnabled)
+            {
+                GameMaster.Instance._UI._BattleUI.ChangeLife(playerIndex, _Health._Lives);
+            }
             BuildInGamePlayerCharacter();
         }
         else LoseGame();

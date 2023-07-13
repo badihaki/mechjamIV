@@ -31,7 +31,8 @@ public class GameMaster : MonoBehaviour
 
     private IEnumerator StartTestMode()
     {
-        Instantiate(GetComponent<PlayerInputManager>().playerPrefab);
+        // Instantiate(GetComponent<PlayerInputManager>().playerPrefab);
+        GetComponent<PlayerInputManager>().JoinPlayer();
 
         yield return new WaitForSeconds(1.0f);
 

@@ -48,6 +48,7 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 		* Dash
 		* Attack (3)
 		* Air Attack
+		* Get Hit
 	* Effects
 * UI
 	* Dash cooldown

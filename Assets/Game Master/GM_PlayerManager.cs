@@ -32,5 +32,6 @@ public class GM_PlayerManager : MonoBehaviour
         Player player = playerInput.GetComponent<Player>();
         _PlayerList.Add(player);
         player.InitializePlayer();
+        GameMaster.Instance._UI._BattleUI.AddPlayer(player);
     }
 }
