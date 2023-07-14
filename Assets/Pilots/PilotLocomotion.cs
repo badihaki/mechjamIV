@@ -14,6 +14,7 @@ public class PilotLocomotion : MonoBehaviour
 
     [field: SerializeField] public float dashTimer { get; private set; }
     [field:SerializeField] public int dashCount { get; private set; }
+    public bool _CanDash { get; private set; }
 
     // Start is called before the first frame update
     public void Initialize(Player _player)
@@ -23,6 +24,7 @@ public class PilotLocomotion : MonoBehaviour
         _PhysicsController = GetComponent<Rigidbody2D>();
         _CheckGrounded = gameObject.AddComponent<CheckForGround>();
         _IsFacingRight = true;
+        _CanDash = true;
     }
 
     // Update is called once per frame
@@ -34,7 +36,15 @@ public class PilotLocomotion : MonoBehaviour
     private void ControlDashTimer()
     {
         if (dashTimer > 0) dashTimer -= Time.deltaTime;
-        else if (dashTimer <= 0) dashTimer = 0;
+        else if (dashTimer <= 0)
+        {
+            if(_CanDash == false)
+            {
+                _CanDash = true;
+                GameMaster.Instance._UI._BattleUI.SetDash(player.playerIndex, _CanDash);
+            }
+            dashTimer = 0;
+        }
     }
     
     public void StopMovement()
@@ -57,15 +67,19 @@ public class PilotLocomotion : MonoBehaviour
 
     public void Dash(Vector2 direction)
     {
-        if (dashTimer <= 0 && dashCount > 0)
-        {
-            dashTimer = player._PilotSO.dashTime;
-            dashCount--;
-            _PhysicsController.velocity = new Vector2((transform.localScale.x * player._PilotSO.dashPower) * direction.x, (transform.localScale.y * player._PilotSO.dashPower) * direction.y);
-        }
+        dashTimer = player._PilotSO.dashTime;
+        dashCount--;
+        _PhysicsController.velocity = new Vector2((transform.localScale.x * player._PilotSO.dashPower) * direction.x, (transform.localScale.y * player._PilotSO.dashPower) * direction.y);
+        _CanDash = false;
+        GameMaster.Instance._UI._BattleUI.SetDash(player.playerIndex, _CanDash);
     }
 
-    public void ResetDashCount() => dashCount = player._PilotSO.maxDashCount;
+    public void ResetDashCount()
+    {
+        dashCount = player._PilotSO.maxDashCount;
+        _CanDash = true;
+        GameMaster.Instance._UI._BattleUI.SetDash(player.playerIndex, _CanDash);
+    }
 
     public void Pushback(Vector2 direction) => _PhysicsController.AddForce(direction, ForceMode2D.Impulse);
 

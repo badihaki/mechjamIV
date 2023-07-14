@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8252142514151779115}
   - component: {fileID: 3840621062758843411}
   - component: {fileID: 7535057818217022140}
+  - component: {fileID: 4977104496169181190}
   - component: {fileID: 5866817238494952227}
   m_Layer: 0
   m_Name: Game Master
@@ -77,6 +78,18 @@ MonoBehaviour:
   battleUIObj: {fileID: 9022613850937886095, guid: d6dd43a876ae9af45890c903f2a8f940,
     type: 3}
   <_BattleUI>k__BackingField: {fileID: 0}
+--- !u!114 &4977104496169181190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715387386432157004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8831c0a963f0f04e998dc08f7922a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5866817238494952227
 MonoBehaviour:
   m_ObjectHideFlags: 0

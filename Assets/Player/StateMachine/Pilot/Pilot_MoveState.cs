@@ -46,7 +46,7 @@ public class Pilot_MoveState : PC_State
         if (moveInput.x == 0) _StateMachine.ChangeState(_Player._PilotCharacter._IdleState);
         if (jumpInput) _StateMachine.ChangeState(_Player._PilotCharacter._JumpState);
         if (!grounded) _StateMachine.ChangeState(_Player._PilotCharacter._FallingState);
-        if (_Player._Movement.dashTimer <= 0.0f && dashInput) _StateMachine.ChangeState(_Player._PilotCharacter._DashState);
+        if (_Player._Movement._CanDash && dashInput) _StateMachine.ChangeState(_Player._PilotCharacter._DashState);
     }
 
     // end

@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour, IDamageable
 {
     public Health _Health { get; private set; }
-    [SerializeField] private int playerIndex;
+    [field: SerializeField] public int playerIndex { get; private set; }
     public PlayerControls _Controls { get; private set; }
     public PlayerEffects _Effects { get; private set; }
 

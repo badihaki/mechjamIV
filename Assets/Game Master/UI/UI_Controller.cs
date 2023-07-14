@@ -7,7 +7,6 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] private GameObject battleUIObj;
     [field: SerializeField] public BattleUI _BattleUI { get; private set; }
 
-
     public void Initialize()
     {
         battleUIObj = Instantiate(battleUIObj, GameMaster.Instance.transform);
@@ -22,7 +21,6 @@ public class UI_Controller : MonoBehaviour
     {
         battleUIObj?.SetActive(true);
 
-        // _BattleUI.AddPlayers(GameMaster.Instance.PlayerManager._PlayerList.ToArray());
     }
         
 

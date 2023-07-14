@@ -9,6 +9,7 @@ public class GameMaster : MonoBehaviour
     public static GameMaster Instance { get; private set; }
     public GM_PlayerManager PlayerManager { get; private set; }
     public UI_Controller _UI { get; private set; }
+    public MatchSettings _MatchSettings { get; private set; }
 
     [SerializeField] private bool testMode;
 
@@ -21,31 +22,21 @@ public class GameMaster : MonoBehaviour
         _UI = GetComponent<UI_Controller>();
         _UI.Initialize();
 
+        _MatchSettings = GetComponent<MatchSettings>();
+
         DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
     {
-        if (testMode) StartCoroutine(StartTestMode());
+        if (testMode) StartTestMode();
     }
 
-    private IEnumerator StartTestMode()
+    private void StartTestMode()
     {
-        // Instantiate(GetComponent<PlayerInputManager>().playerPrefab);
         GetComponent<PlayerInputManager>().JoinPlayer();
-
-        yield return new WaitForSeconds(1.0f);
-
         _UI.TurnOnBattleUI();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 
     // end
 }

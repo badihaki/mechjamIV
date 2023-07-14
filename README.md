@@ -15,7 +15,14 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 
 ## Todo
 
+### BUGS
+* Infinite dash in air?
+	* Trail and dash state fire off in the air, why?
+
 ### Gameplay
+* Player Dashing (Important)
+	* Instead of having multiple dashes, lean into the shmoovement of mid-air dashing.
+	* Give everyone 2 stocks of dash, reset it on the ground
 * Player ammo management
 * Mech
 	* State Machine
