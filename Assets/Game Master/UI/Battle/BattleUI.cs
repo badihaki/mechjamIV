@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -49,6 +50,18 @@ public class BattleUI : MonoBehaviour
     {
         print("setting dash to " + isActive.ToString());
         _PlayerCanvases[playerIndex].Find("Dash").GetComponent<Animator>().SetBool("active", isActive);
+    }
+
+    public void SetWeaponReady(int playerIndex, bool isWeaponReady = true)
+    {
+        if (isWeaponReady)
+        {
+            _PlayerCanvases[playerIndex].Find("Ammo").GetComponent<Image>().color = Color.black;
+        }
+        else
+        {
+            _PlayerCanvases[playerIndex].Find("Ammo").GetComponent<Image>().color = Color.red;
+        }
     }
 
 

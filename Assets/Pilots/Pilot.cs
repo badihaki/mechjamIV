@@ -23,9 +23,9 @@ public class Pilot : MonoBehaviour
         _Player = _player;
         _Body = transform.Find("Body").gameObject;
 
-        BuildStates();
+        // BuildStates();
     }
-    protected virtual void BuildStates()
+    public virtual void BuildStates()
     {
         _IdleState = new Pilot_IdleState(_Player, _Player._StateMachine, "idle");
         _MoveState = new Pilot_MoveState(_Player, _Player._StateMachine, "move");

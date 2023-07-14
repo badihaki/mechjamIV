@@ -23,3 +23,5 @@ MonoBehaviour:
   pickupGraphic: {fileID: 21300000, guid: 75c14539e5619bc4fa818955d26c06f9, type: 3}
   weaponPickup: {fileID: 5383296913225223935, guid: bbd8064c6dc9f094ca4af9fd7e51b3a6,
     type: 3}
+  maxAmmo: 5
+  weaponReloadTime: 1.75

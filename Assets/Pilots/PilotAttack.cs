@@ -12,6 +12,7 @@ public class PilotAttack : MonoBehaviour
     [field: SerializeField] public Weapon _Weapon { get; private set; }
     [SerializeField] private Transform projectileSpawnPoint;
     private float attackTimer;
+    [field: SerializeField] public int ammo { get; private set; }
 
     public void Initialize(Pilot _pilot, WeaponScriptableObject _startingWeapon)
     {
@@ -54,12 +55,23 @@ public class PilotAttack : MonoBehaviour
 
     public void Attack()
     {
-        if (attackTimer <= 0.0f)
+        if (attackTimer <= 0.0f && ammo > 0)
         {
             attackTimer = _WeaponSheet.projectileFireRate;
             Projectile shot = Instantiate(_WeaponSheet.projectile, _Weapon.projectileSpawnPoint.position, _WeaponHolder.rotation);
             shot.InitializeProjectile(pilot._Player.transform, _WeaponSheet.projectileSpeed, _WeaponSheet.projectileDamage, _WeaponSheet.projectileForce);
+            ammo--;
+            if (ammo <= 0) StartCoroutine(Reload());
         }
+    }
+
+    public IEnumerator Reload()
+    {
+        ammo = 0;
+        GameMaster.Instance._UI._BattleUI.SetWeaponReady(pilot._Player.playerIndex, false);
+        yield return new WaitForSeconds(_WeaponSheet.weaponReloadTime);
+        ammo = _WeaponSheet.maxAmmo;
+        GameMaster.Instance._UI._BattleUI.SetWeaponReady(pilot._Player.playerIndex);
     }
 
     public void ManageAttackTimer()
@@ -80,6 +92,10 @@ public class PilotAttack : MonoBehaviour
     {
         _Weapon = Instantiate(_WeaponSheet.weaponGameObj, _WeaponHolder).GetComponent<Weapon>();
         _Weapon.BuildWeaponInstance(_WeaponHolder, GetComponent<Pilot>());
+        ammo = _WeaponSheet.maxAmmo;
+        // *** set ammo in the UI
+        print(pilot._Player);
+        GameMaster.Instance._UI._BattleUI.SetWeaponReady(pilot._Player.playerIndex);
     }
 
     public void UnequipWeapon()

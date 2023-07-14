@@ -13,4 +13,6 @@ public class WeaponScriptableObject : ScriptableObject
     public float projectileForce;
     public Sprite pickupGraphic;
     public GameObject weaponPickup;
+    public int maxAmmo;
+    public float weaponReloadTime;
 }

@@ -29,13 +29,19 @@ public class GameMaster : MonoBehaviour
 
     private void Start()
     {
+        // if (testMode) StartTestMode();
+    }
+
+    private void Update()
+    {
         if (testMode) StartTestMode();
     }
 
     private void StartTestMode()
     {
-        GetComponent<PlayerInputManager>().JoinPlayer();
         _UI.TurnOnBattleUI();
+        GetComponent<PlayerInputManager>().JoinPlayer();
+        testMode = false;
     }
 
     // end

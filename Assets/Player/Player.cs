@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         _PilotCharacter = Instantiate(_PilotSO.pilotGameObj, transform).GetComponent<Pilot>();
         _PilotCharacter.name = "Pilot-" + playerIndex;
+        _PilotCharacter.InitiatePilot(this);
 
         _Movement = _PilotCharacter.gameObject.AddComponent<PilotLocomotion>();
         _Movement.Initialize(this);
@@ -65,7 +66,7 @@ public class Player : MonoBehaviour, IDamageable
         _Effects.InitializeEffects(_PilotCharacter);
 
         _StateMachine = new PC_StateMachine();
-        _PilotCharacter.InitiatePilot(this);
+        _PilotCharacter.BuildStates();
         _StateMachine.InitializeStateMachine(_PilotCharacter._IdleState);
 
         int index = UnityEngine.Random.Range(0, GameMaster.Instance.PlayerManager._PlayerSpawnPoints.Count - 1);
