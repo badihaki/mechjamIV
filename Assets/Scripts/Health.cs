@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     [field: SerializeField] public int _Lives { get; private set; }
 
     public void SetHealth(int hp = 1) => _Health = hp;
-    public void SetLives(int stock = 3) => _Lives = stock;
+    public void SetLives() => _Lives = GameMaster.Instance._MatchSettings.playerLives;
 
     internal void TakeALife() => _Lives--;
 }
