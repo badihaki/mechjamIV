@@ -27,6 +27,7 @@ public class PlayerControls : MonoBehaviour
 
     public void OnDash(InputValue value) => ProcessDash(value.isPressed);
     private void ProcessDash(bool input) => _DashInput = input;
+    public void UseDash() => _DashInput = false;
 
     public void OnInteract(InputValue value) => ProcessInteract(value.isPressed);
     private void ProcessInteract(bool input) => _InteractInput = input;

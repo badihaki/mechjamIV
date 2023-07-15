@@ -13,6 +13,7 @@ public class PilotAttack : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPoint;
     private float attackTimer;
     [field: SerializeField] public int ammo { get; private set; }
+    [SerializeField] private bool isReloading;
 
     public void Initialize(Pilot _pilot, WeaponScriptableObject _startingWeapon)
     {
@@ -21,6 +22,8 @@ public class PilotAttack : MonoBehaviour
         _WeaponHolder = transform.Find("Weapon Holder");
         _WeaponSheet = _startingWeapon;
         EquipNewWeapon();
+        ammo = 0;
+        isReloading = false;
     }
 
     // Update is called once per frame
@@ -57,21 +60,28 @@ public class PilotAttack : MonoBehaviour
     {
         if (attackTimer <= 0.0f && ammo > 0)
         {
+            print(ammo + " ammo");
             attackTimer = _WeaponSheet.projectileFireRate;
             Projectile shot = Instantiate(_WeaponSheet.projectile, _Weapon.projectileSpawnPoint.position, _WeaponHolder.rotation);
             shot.InitializeProjectile(pilot._Player.transform, _WeaponSheet.projectileSpeed, _WeaponSheet.projectileDamage, _WeaponSheet.projectileForce);
+            GameMaster.Instance._UI._BattleUI.UseAmmo(pilot._Player.playerIndex);
             ammo--;
-            if (ammo <= 0) StartCoroutine(Reload());
+            print("now we have " + ammo + " ammo");
+            if (ammo <= 0 && !isReloading) StartCoroutine(Reload());
         }
+        else if (ammo <= 0 && !isReloading) StartCoroutine(Reload());
     }
 
     public IEnumerator Reload()
     {
+        isReloading = true;
         ammo = 0;
         GameMaster.Instance._UI._BattleUI.SetWeaponReady(pilot._Player.playerIndex, false);
         yield return new WaitForSeconds(_WeaponSheet.weaponReloadTime);
         ammo = _WeaponSheet.maxAmmo;
         GameMaster.Instance._UI._BattleUI.SetWeaponReady(pilot._Player.playerIndex);
+        GameMaster.Instance._UI._BattleUI.ResetAmmo(pilot._Player.playerIndex, _WeaponSheet.maxAmmo);
+        isReloading = false;
     }
 
     public void ManageAttackTimer()

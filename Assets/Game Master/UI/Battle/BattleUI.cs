@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour
 {
-    [SerializeField] private RectTransform[] _PlayerCanvases; // { get; private set; }
+    [SerializeField] private RectTransform[] _PlayerCanvases;
 
     public void Initialize()
     {
@@ -63,6 +63,9 @@ public class BattleUI : MonoBehaviour
             _PlayerCanvases[playerIndex].Find("Ammo").GetComponent<Image>().color = Color.red;
         }
     }
+
+    public void ResetAmmo(int playerIndex, int maxAmmo) => _PlayerCanvases[playerIndex].GetComponentInChildren<AmmoCounter>().ResetAmmoCounter(maxAmmo);
+    public void UseAmmo(int playerIndex) => _PlayerCanvases[playerIndex].GetComponentInChildren<AmmoCounter>().UseAmmo();
 
 
     // end

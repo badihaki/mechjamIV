@@ -13,7 +13,8 @@ public class PilotLocomotion : MonoBehaviour
     [field: SerializeField] public bool _IsFacingRight { get; private set; }
 
     [field: SerializeField] public float dashTimer { get; private set; }
-    [field:SerializeField] public int dashCount { get; private set; }
+    [field:SerializeField] public int _DashCount { get; private set; }
+    [SerializeField] private int currentDashCount;
     public bool _CanDash { get; private set; }
 
     // Start is called before the first frame update
@@ -25,6 +26,8 @@ public class PilotLocomotion : MonoBehaviour
         _CheckGrounded = gameObject.AddComponent<CheckForGround>();
         _IsFacingRight = true;
         _CanDash = true;
+        _DashCount = 2;
+        currentDashCount = _DashCount;
     }
 
     // Update is called once per frame
@@ -67,18 +70,24 @@ public class PilotLocomotion : MonoBehaviour
 
     public void Dash(Vector2 direction)
     {
-        dashTimer = player._PilotSO.dashTime;
-        dashCount--;
+        if (player._Movement._CheckGrounded.IsGrounded())
+            dashTimer = player._PilotSO.dashTime * 1.35f;
+        else dashTimer = player._PilotSO.dashTime;
+        _DashCount--;
         _PhysicsController.velocity = new Vector2((transform.localScale.x * player._PilotSO.dashPower) * direction.x, (transform.localScale.y * player._PilotSO.dashPower) * direction.y);
+        player._Controls.UseDash();
         _CanDash = false;
         GameMaster.Instance._UI._BattleUI.SetDash(player.playerIndex, _CanDash);
     }
 
-    public void ResetDashCount()
+    public void ResetDash()
     {
-        dashCount = player._PilotSO.maxDashCount;
-        _CanDash = true;
-        GameMaster.Instance._UI._BattleUI.SetDash(player.playerIndex, _CanDash);
+        if (currentDashCount != _DashCount && player._Movement._CheckGrounded.IsGrounded())
+        {
+            currentDashCount = _DashCount;
+            _CanDash = true;
+            GameMaster.Instance._UI._BattleUI.SetDash(player.playerIndex, _CanDash);
+        }
     }
 
     public void Pushback(Vector2 direction) => _PhysicsController.AddForce(direction, ForceMode2D.Impulse);

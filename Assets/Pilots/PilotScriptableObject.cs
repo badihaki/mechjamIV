@@ -14,5 +14,4 @@ public class PilotScriptableObject : ScriptableObject
     public Vector2 movementForce;
     public float dashPower;
     public float dashTime;
-    public int maxDashCount;
 }
