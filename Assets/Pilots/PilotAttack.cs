@@ -60,13 +60,13 @@ public class PilotAttack : MonoBehaviour
     {
         if (attackTimer <= 0.0f && ammo > 0)
         {
-            print(ammo + " ammo");
+            // print(ammo + " ammo");
             attackTimer = _WeaponSheet.projectileFireRate;
             Projectile shot = Instantiate(_WeaponSheet.projectile, _Weapon.projectileSpawnPoint.position, _WeaponHolder.rotation);
             shot.InitializeProjectile(pilot._Player.transform, _WeaponSheet.projectileSpeed, _WeaponSheet.projectileDamage, _WeaponSheet.projectileForce);
             GameMaster.Instance._UI._BattleUI.UseAmmo(pilot._Player.playerIndex);
             ammo--;
-            print("now we have " + ammo + " ammo");
+            // print("now we have " + ammo + " ammo");
             if (ammo <= 0 && !isReloading) StartCoroutine(Reload());
         }
         else if (ammo <= 0 && !isReloading) StartCoroutine(Reload());

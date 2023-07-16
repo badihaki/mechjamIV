@@ -1618,6 +1618,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4977104496169181190, guid: 0316f6789f9f1cc4db1e2503e40a0144,
+        type: 3}
+      propertyPath: <playerLives>k__BackingField
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6715387386432157004, guid: 0316f6789f9f1cc4db1e2503e40a0144,
         type: 3}
       propertyPath: m_Name

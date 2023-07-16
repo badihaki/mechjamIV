@@ -14,7 +14,7 @@ public class Pilot_DeadState : PC_State
         base.Enter();
 
         isRespawning = false;
-        Object.Instantiate(_Player._Effects._VisFX[0], _Player._PilotCharacter.transform.position, Quaternion.identity);
+        Object.Instantiate(_Player._Effects._VisFX[0], _Player._PilotCharacter.transform);
     }
 
     public override void LogicUpdate()

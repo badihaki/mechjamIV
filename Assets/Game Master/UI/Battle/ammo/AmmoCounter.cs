@@ -9,7 +9,6 @@ public class AmmoCounter : MonoBehaviour
 
     public void UseAmmo()
     {
-        print(_CurrentAmmoCounter.Count - 1);
         if (_CurrentAmmoCounter[_CurrentAmmoCounter.Count - 1])
         {
             print(_CurrentAmmoCounter[_CurrentAmmoCounter.Count - 1].gameObject.name);
