@@ -27,8 +27,6 @@ public class GM_PlayerManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
-        print("player joined" + playerInput.playerIndex);
-
         Player player = playerInput.GetComponent<Player>();
         _PlayerList.Add(player);
         player.InitializePlayer();

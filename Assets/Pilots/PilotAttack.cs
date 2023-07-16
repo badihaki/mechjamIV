@@ -103,8 +103,6 @@ public class PilotAttack : MonoBehaviour
         _Weapon = Instantiate(_WeaponSheet.weaponGameObj, _WeaponHolder).GetComponent<Weapon>();
         _Weapon.BuildWeaponInstance(_WeaponHolder, GetComponent<Pilot>());
         ammo = _WeaponSheet.maxAmmo;
-        // *** set ammo in the UI
-        print(pilot._Player);
         GameMaster.Instance._UI._BattleUI.SetWeaponReady(pilot._Player.playerIndex);
     }
 

@@ -41,7 +41,7 @@ public class PilotLocomotion : MonoBehaviour
         if (dashTimer > 0) dashTimer -= Time.deltaTime;
         else if (dashTimer <= 0)
         {
-            if(_CanDash == false)
+            if (_CanDash == false && currentDashCount > 0)
             {
                 _CanDash = true;
                 GameMaster.Instance._UI._BattleUI.SetDash(player.playerIndex, _CanDash);

@@ -18,6 +18,7 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 ### BUGS
 * Infinite dash in air?
 	* Trail and dash state fire off in the air, why?
+* Wacom drivers died???
 
 ### Gameplay
 * Player Dashing (Important)

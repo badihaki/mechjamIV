@@ -47,15 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd4dce205a626441b1f7f7dfc19337d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <_Health>k__BackingField: {fileID: 0}
-  <_Controls>k__BackingField: {fileID: 0}
-  <_Effects>k__BackingField: {fileID: 0}
-  <_PilotSO>k__BackingField: {fileID: 11400000, guid: c9f28243c0b077a4fa856a276f2e1217,
+  <playerIndex>k__BackingField: 0
+  <_PilotSO>k__BackingField: {fileID: 11400000, guid: bc960f96d4d8d4e47b2b3b8643d8a69e,
     type: 2}
-  <_PilotCharacter>k__BackingField: {fileID: 0}
-  <_Movement>k__BackingField: {fileID: 0}
-  <_Attack>k__BackingField: {fileID: 0}
-  <_Interact>k__BackingField: {fileID: 0}
   _startingWeapon: {fileID: 11400000, guid: 880be6eea3cc2144d9d81b2817edf829, type: 2}
 --- !u!114 &2208928151511200633
 MonoBehaviour:

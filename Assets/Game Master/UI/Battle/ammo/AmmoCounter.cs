@@ -11,7 +11,6 @@ public class AmmoCounter : MonoBehaviour
     {
         if (_CurrentAmmoCounter[_CurrentAmmoCounter.Count - 1])
         {
-            print(_CurrentAmmoCounter[_CurrentAmmoCounter.Count - 1].gameObject.name);
             Destroy(_CurrentAmmoCounter[_CurrentAmmoCounter.Count - 1].gameObject);
             _CurrentAmmoCounter.RemoveAt(_CurrentAmmoCounter.Count - 1);
         }
@@ -19,7 +18,11 @@ public class AmmoCounter : MonoBehaviour
 
     public void ResetAmmoCounter(int maxAmmo)
     {
-        print("reloading with " + maxAmmo + "ammo");
+        for(int index = 0;  index < _CurrentAmmoCounter.Count; index++)
+        {
+                Destroy(_CurrentAmmoCounter[index].gameObject);
+                _CurrentAmmoCounter.RemoveAt(index - 1);
+        }
         for (int number = 0; number < maxAmmo; number++)
         {
             //RectTransform icon = Instantiate(ammoIcon, transform);

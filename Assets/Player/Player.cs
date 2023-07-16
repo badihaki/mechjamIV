@@ -30,6 +30,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         ready = false;
         playerIndex = GetComponent<PlayerInput>().playerIndex;
+        name = "Player" + playerIndex + 1;
 
         // controls
         _Controls = GetComponent<PlayerControls>();
@@ -39,7 +40,6 @@ public class Player : MonoBehaviour, IDamageable
         // health. used to track lives
         _Health = gameObject.AddComponent<Health>();
         _Health.SetLives();
-        print("is ui working " + GameMaster.Instance._UI._BattleUI.isActiveAndEnabled);
         if (GameMaster.Instance._UI._BattleUI.isActiveAndEnabled) GameMaster.Instance._UI._BattleUI.ChangeLife(playerIndex, _Health._Lives);
 
         // finally actually build the player
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour, IDamageable
     private void BuildInGamePlayerCharacter()
     {
         _PilotCharacter = Instantiate(_PilotSO.pilotGameObj, transform).GetComponent<Pilot>();
-        _PilotCharacter.name = "Pilot-" + playerIndex;
+        _PilotCharacter.name = "Pilot-" + playerIndex + 1;
         _PilotCharacter.InitiatePilot(this);
 
         _Movement = _PilotCharacter.gameObject.AddComponent<PilotLocomotion>();

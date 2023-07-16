@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a63060533a36724693ffe930ee0de89, type: 3}
+  m_Name: Pilot
+  m_EditorClassIdentifier: 
+  pilotName: Pilot
+  pilotGameObj: {fileID: 4735156491660248673, guid: 6078a9affb44eaf498bdd0a1f62425a2,
+    type: 3}
+  movementForce: {x: 5, y: 10}
+  dashPower: 25
+  dashTime: 1.37

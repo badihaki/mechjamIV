@@ -10,7 +10,7 @@ public class GameMaster : MonoBehaviour
     public GM_PlayerManager PlayerManager { get; private set; }
     public UI_Controller _UI { get; private set; }
     public MatchSettings _MatchSettings { get; private set; }
-
+    [SerializeField] private PlayerInputManager playerInputManager;
     [SerializeField] private bool testMode;
 
     private void Awake()
@@ -23,6 +23,9 @@ public class GameMaster : MonoBehaviour
         _UI.Initialize();
 
         _MatchSettings = GetComponent<MatchSettings>();
+
+        playerInputManager = GetComponent<PlayerInputManager>();
+        playerInputManager.DisableJoining();
 
         DontDestroyOnLoad(this.gameObject);
     }
@@ -40,7 +43,8 @@ public class GameMaster : MonoBehaviour
     private void StartTestMode()
     {
         _UI.TurnOnBattleUI();
-        GetComponent<PlayerInputManager>().JoinPlayer();
+        playerInputManager.EnableJoining();
+        playerInputManager.JoinPlayer();
         testMode = false;
     }
 
