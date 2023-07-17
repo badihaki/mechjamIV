@@ -9,7 +9,7 @@ public class PilotInteract : MonoBehaviour
     [field: SerializeField] public IInteractable activeInteractable;
     private Transform interactStart;
 
-    public void Initialize(Player _player, float length = 1.25f)
+    public void Initialize(Player _player, float length = 0.25f)
     {
         player = _player;
         rayLength = length;

@@ -10,7 +10,6 @@ public class PilotAttack : MonoBehaviour
     [field: SerializeField] public WeaponScriptableObject _WeaponSheet { get; private set; }
     [field: SerializeField] public Transform _WeaponHolder { get; private set; }
     [field: SerializeField] public Weapon _Weapon { get; private set; }
-    [SerializeField] private Transform projectileSpawnPoint;
     private float attackTimer;
     [field: SerializeField] public int ammo { get; private set; }
     [SerializeField] private bool isReloading;
@@ -96,6 +95,7 @@ public class PilotAttack : MonoBehaviour
         UnequipWeapon();
         _WeaponSheet = newWeapon;
         EquipNewWeapon();
+        StartCoroutine(Reload());
     }
 
     private void EquipNewWeapon()

@@ -10,6 +10,7 @@ public class Pilot_DashState : PC_State
 
     protected Vector2 moveInput;
     private float originalGravity;
+    private bool enableMovement;
 
     public override void Enter()
     {
@@ -19,6 +20,7 @@ public class Pilot_DashState : PC_State
         _Player._Movement._PhysicsController.gravityScale = 0.0f;
 
         moveInput = _Player._Controls._MoveInput;
+        enableMovement = false;
 
         _Player._Movement.Dash(moveInput);
         _Player._Effects.ActivateTrail();
@@ -29,6 +31,14 @@ public class Pilot_DashState : PC_State
         base.LogicUpdate();
 
         _Player._Interact.DetectInteract();
+        if (!enableMovement && Time.time > (_StateStartTime + 0.45f)) enableMovement = true;
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if (enableMovement) _Player._Movement.MoveCharacterHorizontal(moveInput.x);
     }
 
     public override void CheckInputs()
@@ -42,7 +52,11 @@ public class Pilot_DashState : PC_State
     {
         base.CheckTransitions();
 
-        if (Time.time > _StateStartTime + 0.185f)
+        if (_Player._Movement._CheckGrounded.IsGrounded() && Time.time >= (_StateStartTime + 1.0f))
+        {
+            _StateMachine.ChangeState(_Player._PilotCharacter._IdleState);
+        }
+        if (Time.time > _StateStartTime + (_Player._PilotSO.dashTime - (_Player._PilotSO.dashTime * 0.308f)))
         {
             if (_Player._Movement._CheckGrounded.IsGrounded()) _StateMachine.ChangeState(_Player._PilotCharacter._IdleState);
             else _StateMachine.ChangeState(_Player._PilotCharacter._FallingState);
@@ -55,6 +69,8 @@ public class Pilot_DashState : PC_State
 
         _Player._Movement._PhysicsController.gravityScale = originalGravity;
         _Player._Effects.DeactivateTrail();
-        _Player._Movement.StopMovement();
+        if (_Player._Movement._CheckGrounded.IsGrounded() == true) _Player._Movement.StopMovement();
     }
+
+    // end
 }
