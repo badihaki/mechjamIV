@@ -121,6 +121,7 @@ public class PilotAttack : MonoBehaviour
         pickup.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
         Destroyer destroyer = pickup.AddComponent<Destroyer>();
         destroyer.InitializeDestroyer(6.35f);
+        Destroy(_Weapon.gameObject);
     }
 
     // end
