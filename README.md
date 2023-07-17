@@ -15,9 +15,11 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 
 ## Todo
 
+### TODO List
+* Directional Input when ejecting from mech
+
 ### BUGS
-* Infinite dash in air?
-	* Trail and dash state fire off in the air, why?
+* In air you cannot aim
 * Wacom drivers died???
 
 ### Gameplay
