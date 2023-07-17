@@ -17,10 +17,11 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 
 ### TODO List
 * Directional Input when ejecting from mech
+* Invulnerability when spawning (till grounded + 1.05f) and when dashing (until movement kicks in)
 
 ### BUGS
-* In air you cannot aim
 * Wacom drivers died???
+* Player doesn't sit in the mech's cockpit when riding, fix that
 
 ### Gameplay
 * Player Dashing (Important)
@@ -60,9 +61,6 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 		* Air Attack
 		* Get Hit
 	* Effects
-* UI
-	* Dash cooldown
-	* Weapon ammo
 * Background Graphics
 * Weapon Graphics
 * Better explosion FX
@@ -109,6 +107,10 @@ You will enter a test room with a mech (the cube) and a weapon pickup. You can p
 * Weapon implement
 * Weapon pickups
 * Projectiles work
+* Weapon ammo system
 ### Gameplay
 * Player Input Manager implemented
 	* players can spawn normally
+### UI
+* Dash cooldown
+* Weapon ammo

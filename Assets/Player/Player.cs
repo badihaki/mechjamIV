@@ -18,6 +18,7 @@ public class Player : MonoBehaviour, IDamageable
     public PilotAttack _Attack { get; private set; }
     public PilotInteract _Interact { get; private set; }
     public PilotMech _MechController { get; private set; }
+    public Transform _Hurtbox { get; private set; }
 
     
     [SerializeField] private WeaponScriptableObject _startingWeapon;
@@ -25,6 +26,8 @@ public class Player : MonoBehaviour, IDamageable
     public PC_StateMachine _StateMachine { get; private set; }
 
     private bool ready;
+
+    [SerializeField] private float invulTime = 1.5f;
 
     public void InitializePlayer()
     {
@@ -77,7 +80,18 @@ public class Player : MonoBehaviour, IDamageable
 
         _PilotCharacter.transform.position = spawnPoint.transform.position;
 
+        _Hurtbox = _PilotCharacter.transform.Find("Hurtbox").transform;
+        StartCoroutine(InvulState());
+        
+        
         ready = true;
+    }
+
+    public IEnumerator InvulState()
+    {
+        _Hurtbox.gameObject.SetActive(false);
+        yield return new WaitForSeconds(invulTime);
+        _Hurtbox.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

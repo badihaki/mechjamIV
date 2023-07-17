@@ -17,6 +17,7 @@ public class Pilot_FallingState : PC_State
         base.LogicUpdate();
 
         _Player._Interact.DetectInteract();
+        _Player._Attack.AimWeapon(moveInput);
         if (attackInput) _Player._Attack.Attack();
     }
 

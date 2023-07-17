@@ -98,8 +98,9 @@ public class PilotLocomotion : MonoBehaviour
         _IsFacingRight = !_IsFacingRight;
     }
 
-    internal void Eject()
+    public void Eject()
     {
         _PhysicsController.AddForce(new Vector2(0.0f, 12.50f), ForceMode2D.Impulse);
+        StartCoroutine(player.InvulState());
     }
 }

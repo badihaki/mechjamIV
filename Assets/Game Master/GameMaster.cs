@@ -13,6 +13,10 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private PlayerInputManager playerInputManager;
     [SerializeField] private bool testMode;
 
+    public GMStateMachine _StateMachine { get; private set; }
+    public StartGame _StartState { get; private set; }
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(this.gameObject);
@@ -32,7 +36,15 @@ public class GameMaster : MonoBehaviour
 
     private void Start()
     {
-        // if (testMode) StartTestMode();
+        BuildStateMachine();
+    }
+
+    private void BuildStateMachine()
+    {
+        _StateMachine = new GMStateMachine();
+        _StartState = new StartGame();
+
+        _StateMachine.InitializeStateMachine(_StartState);
     }
 
     private void Update()

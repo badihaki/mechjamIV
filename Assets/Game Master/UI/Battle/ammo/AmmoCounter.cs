@@ -21,7 +21,7 @@ public class AmmoCounter : MonoBehaviour
         for(int index = 0;  index < _CurrentAmmoCounter.Count; index++)
         {
                 Destroy(_CurrentAmmoCounter[index].gameObject);
-                _CurrentAmmoCounter.RemoveAt(index - 1);
+                _CurrentAmmoCounter.RemoveAt(index);
         }
         for (int number = 0; number < maxAmmo; number++)
         {
