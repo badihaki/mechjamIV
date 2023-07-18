@@ -50,7 +50,10 @@ MonoBehaviour:
   <playerIndex>k__BackingField: 0
   <_PilotSO>k__BackingField: {fileID: 11400000, guid: bc960f96d4d8d4e47b2b3b8643d8a69e,
     type: 2}
+  <_PilotSelectorGameObj>k__BackingField: {fileID: 1907017067573554881, guid: e6801524a98755144a9daedd2a7e5bd9,
+    type: 3}
   _startingWeapon: {fileID: 11400000, guid: 880be6eea3cc2144d9d81b2817edf829, type: 2}
+  invulTime: 1.5
 --- !u!114 &2208928151511200633
 MonoBehaviour:
   m_ObjectHideFlags: 0

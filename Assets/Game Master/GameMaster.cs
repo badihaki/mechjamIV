@@ -10,11 +10,18 @@ public class GameMaster : MonoBehaviour
     public GM_PlayerManager PlayerManager { get; private set; }
     public UI_Controller _UI { get; private set; }
     public MatchSettings _MatchSettings { get; private set; }
+    public GM_SceneManager SceneManager { get; private set; }
     [SerializeField] private PlayerInputManager playerInputManager;
-    [SerializeField] private bool testMode;
+    [field: SerializeField] public bool testMode { get; private set; }
 
+    // state machine
     public GMStateMachine _StateMachine { get; private set; }
-    public StartGame _StartState { get; private set; }
+    public GMWaitState _WaitState { get; private set; }
+    public GMStartGameState _StartState { get; private set; }
+    public GMCharacterSelectState _CharacterSelectState { get; private set; }
+    // end state machine
+
+    [SerializeField] private bool ready = false;
 
 
     private void Awake()
@@ -22,16 +29,19 @@ public class GameMaster : MonoBehaviour
         if (Instance != null && Instance != this) Destroy(this.gameObject);
         else Instance = this;
 
-        PlayerManager = GetComponent<GM_PlayerManager>();
-        _UI = GetComponent<UI_Controller>();
-        _UI.Initialize();
-
-        _MatchSettings = GetComponent<MatchSettings>();
-
-        playerInputManager = GetComponent<PlayerInputManager>();
-        playerInputManager.DisableJoining();
-
         DontDestroyOnLoad(this.gameObject);
+        if (!ready)
+        {
+            PlayerManager = GetComponent<GM_PlayerManager>();
+            _UI = GetComponent<UI_Controller>();
+            _UI.Initialize();
+
+            _MatchSettings = GetComponent<MatchSettings>();
+
+            playerInputManager = GetComponent<PlayerInputManager>();
+            ready = true;
+        }
+        playerInputManager.DisableJoining();
     }
 
     private void Start()
@@ -42,9 +52,11 @@ public class GameMaster : MonoBehaviour
     private void BuildStateMachine()
     {
         _StateMachine = new GMStateMachine();
-        _StartState = new StartGame();
+        _WaitState = new GMWaitState();
+        _StartState = new GMStartGameState();
+        _CharacterSelectState = new GMCharacterSelectState();
 
-        _StateMachine.InitializeStateMachine(_StartState);
+        _StateMachine.InitializeStateMachine(_WaitState);
     }
 
     private void Update()
@@ -58,6 +70,12 @@ public class GameMaster : MonoBehaviour
         playerInputManager.EnableJoining();
         playerInputManager.JoinPlayer();
         testMode = false;
+    }
+
+    public void EnablePlayerJoining(bool isEnabled)
+    {
+        if (isEnabled) playerInputManager.EnableJoining();
+        else playerInputManager.DisableJoining();
     }
 
     // end

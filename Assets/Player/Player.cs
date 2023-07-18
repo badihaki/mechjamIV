@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IDamageable
 
     // pilot stuff
     [field: SerializeField] public PilotScriptableObject _PilotSO { get; private set; }
+    [field: SerializeField] public GameObject _PilotSelectorGameObj { get; private set; }
     public Pilot _PilotCharacter { get; private set; }
     public PilotLocomotion _Movement { get; private set; }
     public PilotAttack _Attack { get; private set; }
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         ready = false;
         playerIndex = GetComponent<PlayerInput>().playerIndex;
-        name = "Player" + playerIndex + 1;
+        name = "Player-" + (playerIndex + 1).ToString();
 
         // controls
         _Controls = GetComponent<PlayerControls>();
@@ -46,12 +47,18 @@ public class Player : MonoBehaviour, IDamageable
         if (GameMaster.Instance._UI._BattleUI.isActiveAndEnabled) GameMaster.Instance._UI._BattleUI.ChangeLife(playerIndex, _Health._Lives);
 
         // finally actually build the player
-        BuildInGamePlayerCharacter();
+        // BuildInGamePlayerCharacter();
+    }
 
+    public void BuildPilotSelector()
+    {
+        _PilotSelectorGameObj = Instantiate(_PilotSelectorGameObj);
+        _PilotSelectorGameObj.name = (playerIndex + 1) + "-Player Pilot Selector";
+        PlayerPilotSelector playerPilotSelector = _PilotSelectorGameObj.GetComponent<PlayerPilotSelector>();
 
     }
 
-    private void BuildInGamePlayerCharacter()
+    public void BuildInGamePlayerCharacter()
     {
         _PilotCharacter = Instantiate(_PilotSO.pilotGameObj, transform).GetComponent<Pilot>();
         _PilotCharacter.name = "Pilot-" + playerIndex + 1;

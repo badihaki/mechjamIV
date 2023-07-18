@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class GM_PlayerManager : MonoBehaviour
 {
     [field:SerializeField] public List<Player> _PlayerList { get; private set; }
+    [field: SerializeField] public List<PilotScriptableObject> _PilotTemplates { get; private set; }
     [field: SerializeField] public List<PilotSpawnPoint> _PlayerSpawnPoints { get; private set; }
 
     private void Awake()
@@ -30,6 +31,11 @@ public class GM_PlayerManager : MonoBehaviour
         Player player = playerInput.GetComponent<Player>();
         _PlayerList.Add(player);
         player.InitializePlayer();
-        GameMaster.Instance._UI._BattleUI.AddPlayer(player);
+        if (GameMaster.Instance.testMode)
+        {
+            player.BuildInGamePlayerCharacter();
+            GameMaster.Instance._UI._BattleUI.AddPlayer(player);
+        }
+        else player.BuildPilotSelector();
     }
 }
