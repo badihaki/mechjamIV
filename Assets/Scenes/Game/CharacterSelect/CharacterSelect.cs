@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterSelect : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class CharacterSelect : MonoBehaviour
 
     private CharacterSelectHelper helper;
     [field: SerializeField] public Transform[] templatePlacementPoints { get; private set; }
-    [SerializeField] private GameObject startGameCanvas;
 
     [SerializeField] private int numberOfReadyPlayers;
 
@@ -23,8 +23,6 @@ public class CharacterSelect : MonoBehaviour
         GameMaster.Instance._StateMachine.ChangeState(GameMaster.Instance._CharacterSelectState);
         helper = GetComponentInChildren<CharacterSelectHelper>();
 
-        startGameCanvas.SetActive(false);
-
         helper.StartHelper();
     }
 
@@ -32,15 +30,17 @@ public class CharacterSelect : MonoBehaviour
     {
         numberOfReadyPlayers++;
 
-        if (numberOfReadyPlayers == 2) AllPlayersAreReady();
+        if (numberOfReadyPlayers == 2) StartCoroutine(AllPlayersAreReady());
 
     // end
     }
 
-    private void AllPlayersAreReady()
+    private IEnumerator AllPlayersAreReady()
     {
-        helper.gameObject.SetActive(false);
-        startGameCanvas.SetActive(true);
+        helper.StartingGame();
+        yield return new WaitForSeconds(3.5f);
+        GameMaster.Instance._StateMachine.ChangeState(GameMaster.Instance._WaitState);
+        GameMaster.Instance._SceneManager.ChangeScene("Battle");
     }
 
     public void StartGame()

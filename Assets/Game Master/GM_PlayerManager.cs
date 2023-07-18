@@ -38,4 +38,12 @@ public class GM_PlayerManager : MonoBehaviour
         }
         else player.BuildPilotSelector();
     }
+
+    public void BuildAllPlayersIntoScene()
+    {
+        for (int index = 0; index < _PlayerList.Count; index++)
+        {
+            _PlayerList[index].BuildInGamePlayerCharacter();
+        }
+    }
 }

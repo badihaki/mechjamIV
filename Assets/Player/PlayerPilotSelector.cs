@@ -19,7 +19,7 @@ public class PlayerPilotSelector : MonoBehaviour
     {
         player = _player;
 
-        pilotCharacters = GameMaster.Instance.PlayerManager._PilotTemplates;
+        pilotCharacters = GameMaster.Instance._PlayerManager._PilotTemplates;
         currentTemplateIndex = 0;
         currentSelectedTemplate = Instantiate(pilotCharacters[currentTemplateIndex], transform);
         currentSelectedTemplate.name = "Player-" + (player.playerIndex + 1).ToString() + "-Template";

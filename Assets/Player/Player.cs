@@ -48,6 +48,8 @@ public class Player : MonoBehaviour, IDamageable
         _Health.SetLives();
         if (GameMaster.Instance._UI._BattleUI.isActiveAndEnabled) GameMaster.Instance._UI._BattleUI.ChangeLife(playerIndex, _Health._Lives);
 
+        DontDestroyOnLoad(this);
+
         // finally actually build the player
         // BuildInGamePlayerCharacter();
     }
@@ -58,6 +60,12 @@ public class Player : MonoBehaviour, IDamageable
         _PilotSelectorGameObj.name = (playerIndex + 1) + "-Player Pilot Selector";
         PlayerPilotSelector playerPilotSelector = _PilotSelectorGameObj.GetComponent<PlayerPilotSelector>();
         playerPilotSelector.Initialize(this);
+    }
+    
+    public void DestroyPilotSelector()
+    {
+        Destroy(_PilotSelectorGameObj);
+        _PilotSelectorGameObj = null;
     }
 
     public void BuildInGamePlayerCharacter()
@@ -84,8 +92,8 @@ public class Player : MonoBehaviour, IDamageable
         _PilotCharacter.BuildStates();
         _StateMachine.InitializeStateMachine(_PilotCharacter._IdleState);
 
-        int index = UnityEngine.Random.Range(0, GameMaster.Instance.PlayerManager._PlayerSpawnPoints.Count - 1);
-        PilotSpawnPoint spawnPoint = GameMaster.Instance.PlayerManager._PlayerSpawnPoints[index];
+        int index = UnityEngine.Random.Range(0, GameMaster.Instance._PlayerManager._PlayerSpawnPoints.Count - 1);
+        PilotSpawnPoint spawnPoint = GameMaster.Instance._PlayerManager._PlayerSpawnPoints[index];
 
         _PilotCharacter.transform.position = spawnPoint.transform.position;
 

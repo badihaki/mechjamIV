@@ -7,10 +7,10 @@ using UnityEngine.InputSystem;
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster Instance { get; private set; }
-    public GM_PlayerManager PlayerManager { get; private set; }
+    public GM_PlayerManager _PlayerManager { get; private set; }
     public UI_Controller _UI { get; private set; }
     public MatchSettings _MatchSettings { get; private set; }
-    public GM_SceneManager SceneManager { get; private set; }
+    public GM_SceneManager _SceneManager { get; private set; }
     [SerializeField] private PlayerInputManager playerInputManager;
     [field: SerializeField] public bool testMode { get; private set; }
 
@@ -19,6 +19,7 @@ public class GameMaster : MonoBehaviour
     public GMWaitState _WaitState { get; private set; }
     public GMStartGameState _StartState { get; private set; }
     public GMCharacterSelectState _CharacterSelectState { get; private set; }
+    public GMBattleState _BattleState { get; private set; }
     // end state machine
 
     [SerializeField] private bool ready = false;
@@ -32,7 +33,7 @@ public class GameMaster : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         if (!ready)
         {
-            PlayerManager = GetComponent<GM_PlayerManager>();
+            _PlayerManager = GetComponent<GM_PlayerManager>();
             _UI = GetComponent<UI_Controller>();
             _UI.Initialize();
 
