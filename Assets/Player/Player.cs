@@ -40,18 +40,22 @@ public class Player : MonoBehaviour, IDamageable
 
         // controls
         _Controls = GetComponent<PlayerControls>();
-         
+
         _Effects = GetComponent<PlayerEffects>();
 
         // health. used to track lives
         _Health = gameObject.AddComponent<Health>();
         _Health.SetLives();
-        if (GameMaster.Instance._UI._BattleUI.isActiveAndEnabled) GameMaster.Instance._UI._BattleUI.ChangeLife(playerIndex, _Health._Lives);
 
         DontDestroyOnLoad(this);
 
         // finally actually build the player
         // BuildInGamePlayerCharacter();
+    }
+
+    public void LinkToUserInterface()
+    {
+        if (GameMaster.Instance._UI._BattleUI.isActiveAndEnabled) GameMaster.Instance._UI._BattleUI.ChangeLife(playerIndex, _Health._Lives);
     }
 
     public void BuildPilotSelector()

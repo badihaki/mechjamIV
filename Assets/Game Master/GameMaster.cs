@@ -27,7 +27,7 @@ public class GameMaster : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) Destroy(this.gameObject);
+        if (Instance != null && Instance != this) Destroy(gameObject);
         else Instance = this;
 
         DontDestroyOnLoad(this.gameObject);
@@ -40,6 +40,9 @@ public class GameMaster : MonoBehaviour
             _MatchSettings = GetComponent<MatchSettings>();
 
             playerInputManager = GetComponent<PlayerInputManager>();
+
+            _SceneManager = GetComponent<GM_SceneManager>();
+
             ready = true;
         }
         playerInputManager.DisableJoining();
@@ -56,6 +59,7 @@ public class GameMaster : MonoBehaviour
         _WaitState = new GMWaitState();
         _StartState = new GMStartGameState();
         _CharacterSelectState = new GMCharacterSelectState();
+        _BattleState = new GMBattleState();
 
         _StateMachine.InitializeStateMachine(_WaitState);
     }

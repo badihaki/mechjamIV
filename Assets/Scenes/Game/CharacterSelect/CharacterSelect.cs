@@ -40,12 +40,8 @@ public class CharacterSelect : MonoBehaviour
         helper.StartingGame();
         yield return new WaitForSeconds(3.5f);
         GameMaster.Instance._StateMachine.ChangeState(GameMaster.Instance._WaitState);
-        GameMaster.Instance._SceneManager.ChangeScene("Battle");
-    }
-
-    public void StartGame()
-    {
-        print("Start the game");
+        // print(GameMaster.Instance._SceneManager);
+        GameMaster.Instance._SceneManager.ChangeSceneByIndex(3);
     }
 
     // end
