@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class GMState
 {
+    public float stateStartTime { get; protected set; }
+
     public virtual void Enter()
     {
-        
+        stateStartTime = Time.time;
     }
     public virtual void Exit()
     {

@@ -8,6 +8,6 @@ public class GMCharacterSelectState : GMState
     {
         base.Enter();
 
-        GameMaster.Instance.EnablePlayerJoining(true);
+        GameMaster.Instance.AllowJoinFromCharacterSelect();
     }
 }

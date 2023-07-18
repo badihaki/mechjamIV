@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class CharacterSelect : MonoBehaviour
 {
-    private CharacterSelectHelper helper;
+    public static CharacterSelect Instance;
 
-    // Start is called before the first frame update
+    private CharacterSelectHelper helper;
+    public Transform[] playerPoints;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
     void Start()
     {
         GameMaster.Instance._StateMachine.ChangeState(GameMaster.Instance._CharacterSelectState);

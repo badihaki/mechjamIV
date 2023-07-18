@@ -72,6 +72,17 @@ public class GameMaster : MonoBehaviour
         testMode = false;
     }
 
+    public void AllowJoinFromCharacterSelect()
+    {
+        StartCoroutine(DelayThenEnableJoin());
+    }
+
+    private IEnumerator DelayThenEnableJoin()
+    {
+        yield return new WaitForSeconds(0.35f);
+        EnablePlayerJoining(true);
+    }
+
     public void EnablePlayerJoining(bool isEnabled)
     {
         if (isEnabled) playerInputManager.EnableJoining();

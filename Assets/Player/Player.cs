@@ -55,7 +55,7 @@ public class Player : MonoBehaviour, IDamageable
         _PilotSelectorGameObj = Instantiate(_PilotSelectorGameObj);
         _PilotSelectorGameObj.name = (playerIndex + 1) + "-Player Pilot Selector";
         PlayerPilotSelector playerPilotSelector = _PilotSelectorGameObj.GetComponent<PlayerPilotSelector>();
-
+        playerPilotSelector.Initialize(this);
     }
 
     public void BuildInGamePlayerCharacter()

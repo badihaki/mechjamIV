@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class GM_PlayerManager : MonoBehaviour
 {
     [field:SerializeField] public List<Player> _PlayerList { get; private set; }
-    [field: SerializeField] public List<PilotScriptableObject> _PilotTemplates { get; private set; }
+    [field: SerializeField] public List<PilotTemplate> _PilotTemplates { get; private set; }
     [field: SerializeField] public List<PilotSpawnPoint> _PlayerSpawnPoints { get; private set; }
 
     private void Awake()

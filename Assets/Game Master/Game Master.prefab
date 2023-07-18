@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInputManager: {fileID: 0}
   <testMode>k__BackingField: 0
+  ready: 0
 --- !u!114 &3840621062758843411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +65,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_PlayerList>k__BackingField: []
-  <_PilotTemplates>k__BackingField: []
+  <_PilotTemplates>k__BackingField:
+  - {fileID: 4173160597233002190, guid: 6b99a7b770550c2488cfff7fd86206fe, type: 3}
   <_PlayerSpawnPoints>k__BackingField: []
 --- !u!114 &7535057818217022140
 MonoBehaviour:
