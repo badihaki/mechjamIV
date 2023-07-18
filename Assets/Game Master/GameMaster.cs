@@ -61,7 +61,7 @@ public class GameMaster : MonoBehaviour
 
     private void Update()
     {
-        if (testMode) StartTestMode();
+        if (testMode && ready) StartTestMode();
     }
 
     private void StartTestMode()

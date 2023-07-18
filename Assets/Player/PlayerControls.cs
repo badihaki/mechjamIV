@@ -11,6 +11,7 @@ public class PlayerControls : MonoBehaviour
     [field: SerializeField] public bool _AttackInput { get; private set; }
     [field: SerializeField] public bool _DashInput { get; private set; }
     [field: SerializeField] public bool _InteractInput { get; private set; }
+    [field: SerializeField] public bool _MenuInput { get; private set; }
 
     public void OnMove(InputValue value) => ProcessMove(value.Get<Vector2>());
     private void ProcessMove(Vector2 input)
@@ -32,6 +33,10 @@ public class PlayerControls : MonoBehaviour
     public void OnInteract(InputValue value) => ProcessInteract(value.isPressed);
     private void ProcessInteract(bool input) => _InteractInput = input;
     public void UseInteract() => _InteractInput = false;
+
+    public void OnMenu(InputValue value) => ProcessMenu(value.isPressed);
+    private void ProcessMenu(bool input) => _MenuInput = input;
+    public void UseMenu() => _MenuInput = false;
 
     // end
 }

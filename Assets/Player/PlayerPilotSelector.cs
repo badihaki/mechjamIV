@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class PlayerPilotSelector : MonoBehaviour
     private Color[] colors;
     private int currentColorIndex;
     private float selectCoolDown;
+    [SerializeField] private bool isReady;
 
     public void Initialize(Player _player)
     {
@@ -19,8 +21,9 @@ public class PlayerPilotSelector : MonoBehaviour
 
         pilotCharacters = GameMaster.Instance.PlayerManager._PilotTemplates;
         currentTemplateIndex = 0;
-        currentSelectedTemplate = Instantiate(pilotCharacters[currentTemplateIndex]);
-        currentSelectedTemplate.transform.position = CharacterSelect.Instance.playerPoints[player.playerIndex].position;
+        currentSelectedTemplate = Instantiate(pilotCharacters[currentTemplateIndex], transform);
+        currentSelectedTemplate.name = "Player-" + (player.playerIndex + 1).ToString() + "-Template";
+        transform.position = CharacterSelect.Instance.templatePlacementPoints[player.playerIndex].position;
 
         colors = new Color[6];
         colors[0] = Color.white;
@@ -31,7 +34,10 @@ public class PlayerPilotSelector : MonoBehaviour
         colors[5] = Color.black;
 
         currentSelectedTemplate.GetComponent<PilotTemplate>().ChangeColor(colors[currentColorIndex]);
-        selectCoolDown = 1.25f;
+        selectCoolDown = 1.5f;
+        // checkmark ui object can go away
+
+        isReady = false;
     }
 
     private void Update()
@@ -39,19 +45,38 @@ public class PlayerPilotSelector : MonoBehaviour
         if (selectCoolDown > 0) selectCoolDown -= Time.deltaTime;
         else selectCoolDown = 0;
 
-        if (selectCoolDown == 0)
+        if(!isReady)
         {
-            if(player._Controls._MoveInput.y > 0)
+            if (selectCoolDown == 0)
             {
-                selectCoolDown = 1.25f;
-                MoveColorIndexForward();
-            }
-            else if(player._Controls._MoveInput.y < 0)
-            {
-                selectCoolDown = 1.25f;
-                MoveColorIndexBackward();
+                if (player._Controls._MoveInput.y > 0)
+                {
+                    selectCoolDown = 1.25f;
+                    MoveColorIndexForward();
+                }
+                else if (player._Controls._MoveInput.y < 0)
+                {
+                    selectCoolDown = 1.25f;
+                    MoveColorIndexBackward();
+                }
+                else if (player._Controls._JumpInput || player._Controls._MenuInput)
+                {
+                    if (player._Controls._JumpInput) player._Controls.UseJump();
+                    else if (player._Controls._MenuInput) player._Controls.UseMenu();
+
+                    PlayerReadyUp();
+                }
             }
         }
+    }
+
+    private void PlayerReadyUp()
+    {
+        player.SetPlayerColor(colors[currentColorIndex]);
+        CharacterSelect.Instance.AnotherPlayerIsReady();
+        // show the check mark ui element
+        // change color of checkmark
+        isReady = true;
     }
 
     public void MoveColorIndexForward()
@@ -66,7 +91,6 @@ public class PlayerPilotSelector : MonoBehaviour
         if (currentColorIndex < 0) currentColorIndex = colors.Length - 1;
         ChangePilotTemplateColor();
     }
-    // public void OnMove()
 
     private void ChangePilotTemplateColor() => currentSelectedTemplate.GetComponent<PilotTemplate>().ChangeColor(colors[currentColorIndex]);
 

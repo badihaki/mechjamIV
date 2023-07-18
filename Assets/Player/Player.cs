@@ -8,6 +8,8 @@ public class Player : MonoBehaviour, IDamageable
 {
     public Health _Health { get; private set; }
     [field: SerializeField] public int playerIndex { get; private set; }
+    [field: SerializeField] public Color _PlayerColor { get; private set; }
+    public void SetPlayerColor(Color color) => _PlayerColor = color;
     public PlayerControls _Controls { get; private set; }
     public PlayerEffects _Effects { get; private set; }
 
@@ -52,7 +54,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void BuildPilotSelector()
     {
-        _PilotSelectorGameObj = Instantiate(_PilotSelectorGameObj);
+        _PilotSelectorGameObj = Instantiate(_PilotSelectorGameObj, transform);
         _PilotSelectorGameObj.name = (playerIndex + 1) + "-Player Pilot Selector";
         PlayerPilotSelector playerPilotSelector = _PilotSelectorGameObj.GetComponent<PlayerPilotSelector>();
         playerPilotSelector.Initialize(this);
@@ -89,7 +91,6 @@ public class Player : MonoBehaviour, IDamageable
 
         _Hurtbox = _PilotCharacter.transform.Find("Hurtbox").transform;
         StartCoroutine(InvulState());
-        
         
         ready = true;
     }
