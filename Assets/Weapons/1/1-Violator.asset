@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponGameObj: {fileID: 6927009064636835659, guid: 83d895e521cddf742afe4791ed42b47d,
     type: 3}
-  projectile: {fileID: 3137762490849864100, guid: f1b2ca57c75857f4ea1b2396d9211a87,
+  projectile: {fileID: 3475694671882623857, guid: 3695be0d33d96bb4099b31b5759ee307,
     type: 3}
-  projectileFireRate: 0.1
+  projectileFireRate: 1
   projectileSpeed: 22
   projectileDamage: 1
   projectileForce: 4.5

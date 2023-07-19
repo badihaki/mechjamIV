@@ -83,6 +83,9 @@ MonoBehaviour:
   battleUIObj: {fileID: 9022613850937886095, guid: d6dd43a876ae9af45890c903f2a8f940,
     type: 3}
   <_BattleUI>k__BackingField: {fileID: 0}
+  winLoseObj: {fileID: 8744592448172824011, guid: 6d67ad5761813a644bd8462db72513a6,
+    type: 3}
+  <_WinLoseUI>k__BackingField: {fileID: 0}
 --- !u!114 &4977104496169181190
 MonoBehaviour:
   m_ObjectHideFlags: 0

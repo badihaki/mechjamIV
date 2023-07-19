@@ -62,7 +62,8 @@ public class PilotAttack : MonoBehaviour
             // print(ammo + " ammo");
             attackTimer = _WeaponSheet.projectileFireRate;
             Projectile shot = Instantiate(_WeaponSheet.projectile, _Weapon.projectileSpawnPoint.position, _WeaponHolder.rotation);
-            shot.InitializeProjectile(pilot._Player.transform, _WeaponSheet.projectileSpeed, _WeaponSheet.projectileDamage, _WeaponSheet.projectileForce);
+            // shot.InitializeProjectile(pilot._Player.transform, _WeaponSheet.projectileSpeed, _WeaponSheet.projectileDamage, _WeaponSheet.projectileForce, _WeaponSheet);
+            shot.InitializeProjectile(pilot._Player.transform, _WeaponSheet);
             GameMaster.Instance._UI._BattleUI.UseAmmo(pilot._Player.playerIndex);
             ammo--;
             // print("now we have " + ammo + " ammo");
