@@ -6,6 +6,7 @@ public class Pilot : MonoBehaviour
 {
     public Player _Player { get; private set; }
     public GameObject _Body { get; private set; }
+    public Animator _Animator { get; private set; }
 
     // States listed below
     public Pilot_IdleState _IdleState { get; private set; }

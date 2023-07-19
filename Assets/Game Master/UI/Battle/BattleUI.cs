@@ -11,6 +11,13 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     [SerializeField] private RectTransform[] _PlayerCanvases;
+    public static BattleUI Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(Instance);
+    }
 
     public void Initialize()
     {

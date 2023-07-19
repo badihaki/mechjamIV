@@ -31,8 +31,6 @@ public class CharacterSelect : MonoBehaviour
         numberOfReadyPlayers++;
 
         if (numberOfReadyPlayers == 2) StartCoroutine(AllPlayersAreReady());
-
-    // end
     }
 
     private IEnumerator AllPlayersAreReady()
@@ -40,7 +38,6 @@ public class CharacterSelect : MonoBehaviour
         helper.StartingGame();
         yield return new WaitForSeconds(3.5f);
         GameMaster.Instance._StateMachine.ChangeState(GameMaster.Instance._WaitState);
-        // print(GameMaster.Instance._SceneManager);
         GameMaster.Instance._SceneManager.ChangeSceneByIndex(3);
     }
 

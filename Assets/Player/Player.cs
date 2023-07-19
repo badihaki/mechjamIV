@@ -12,6 +12,7 @@ public class Player : MonoBehaviour, IDamageable
     public void SetPlayerColor(Color color) => _PlayerColor = color;
     public PlayerControls _Controls { get; private set; }
     public PlayerEffects _Effects { get; private set; }
+    [field:SerializeField]public PilotScarf _Scarf { get; private set; }
 
     // pilot stuff
     [field: SerializeField] public PilotScriptableObject _PilotSO { get; private set; }
@@ -95,6 +96,9 @@ public class Player : MonoBehaviour, IDamageable
         _StateMachine = new PC_StateMachine();
         _PilotCharacter.BuildStates();
         _StateMachine.InitializeStateMachine(_PilotCharacter._IdleState);
+
+        _Scarf = _PilotCharacter.transform.Find("Graphics").GetComponentInChildren<PilotScarf>();
+        _Scarf.InitializeScarf(_PlayerColor);
 
         int index = UnityEngine.Random.Range(0, GameMaster.Instance._PlayerManager._PlayerSpawnPoints.Count - 1);
         PilotSpawnPoint spawnPoint = GameMaster.Instance._PlayerManager._PlayerSpawnPoints[index];

@@ -30,7 +30,7 @@ public class GameMaster : MonoBehaviour
         if (Instance != null && Instance != this) Destroy(gameObject);
         else Instance = this;
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
         if (!ready)
         {
             _PlayerManager = GetComponent<GM_PlayerManager>();
