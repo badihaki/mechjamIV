@@ -30,22 +30,26 @@ public class GameMaster : MonoBehaviour
         if (Instance != null && Instance != this) Destroy(gameObject);
         else Instance = this;
 
-        DontDestroyOnLoad(gameObject);
-        if (!ready)
+        if(Instance == this)
         {
-            _PlayerManager = GetComponent<GM_PlayerManager>();
-            _UI = GetComponent<UI_Controller>();
-            _UI.Initialize();
+            DontDestroyOnLoad(gameObject);
+            if (!ready)
+            {
+                _PlayerManager = GetComponent<GM_PlayerManager>();
+                _UI = GetComponent<UI_Controller>();
+                print("Initializing UI from GM");
+                _UI.Initialize();
 
-            _MatchSettings = GetComponent<MatchSettings>();
+                _MatchSettings = GetComponent<MatchSettings>();
 
-            playerInputManager = GetComponent<PlayerInputManager>();
+                playerInputManager = GetComponent<PlayerInputManager>();
 
-            _SceneManager = GetComponent<GM_SceneManager>();
+                _SceneManager = GetComponent<GM_SceneManager>();
 
-            ready = true;
+                ready = true;
+            }
+            playerInputManager.DisableJoining();
         }
-        playerInputManager.DisableJoining();
     }
 
     private void Start()

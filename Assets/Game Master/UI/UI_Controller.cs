@@ -20,8 +20,8 @@ public class UI_Controller : MonoBehaviour
     public void TurnOnBattleUI()
     {
         print("Turnin on battle ui");
-        battleUIObj?.SetActive(true);
-
+        if(!battleUIObj.activeInHierarchy) battleUIObj.SetActive(true);
+        // battleUIObj?.SetActive(true);
     }
         
 

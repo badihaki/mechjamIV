@@ -41,9 +41,10 @@ public class GM_PlayerManager : MonoBehaviour
 
     public void BuildAllPlayersIntoScene()
     {
-        for (int index = 0; index < _PlayerList.Count; index++)
+        for (int playerIndex = 0; playerIndex < _PlayerList.Count; playerIndex++)
         {
-            _PlayerList[index].BuildInGamePlayerCharacter();
+            _PlayerList[playerIndex].BuildInGamePlayerCharacter();
+            GameMaster.Instance._UI._BattleUI.AddPlayer(_PlayerList[playerIndex]);
         }
     }
 }
