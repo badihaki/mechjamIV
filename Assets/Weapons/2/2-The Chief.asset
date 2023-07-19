@@ -24,4 +24,4 @@ MonoBehaviour:
   weaponPickup: {fileID: 5383296913225223935, guid: d6c25760b56ed6145843626081b8d0c2,
     type: 3}
   maxAmmo: 18
-  weaponReloadTime: 0.75
+  weaponReloadTime: 1.75

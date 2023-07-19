@@ -18,7 +18,7 @@ public class RichPeople : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        spawnTimer = UnityEngine.Random.Range(minSpawnAddTime, maxSpawnAddTime);
     }
 
     // Update is called once per frame
@@ -36,19 +36,16 @@ public class RichPeople : MonoBehaviour
         int chooseWhatSpawns = UnityEngine.Random.Range(1, 100);
         if (chooseWhatSpawns <= 50) SpawnMech();
         else SpawnWeapon();
-        // int locationIndex = UnityEngine.Random.Range()
-        // Transform spawnLocation = 
     }
 
     private void SpawnWeapon()
     {
-        Mech newMech = _MechsToSpawn[UnityEngine.Random.Range(0, _MechsToSpawn.Count - 1)];
-
+        Mech newMech = Instantiate(_MechsToSpawn[UnityEngine.Random.Range(0, _MechsToSpawn.Count - 1)], spawnLocation().position, Quaternion.identity);
     }
 
     private void SpawnMech()
     {
-        throw new NotImplementedException();
+        GameObject newWeaponPickup = Instantiate(_WeaponsToSpawn[UnityEngine.Random.Range(0, _WeaponsToSpawn.Count - 1)].weaponPickup, spawnLocation().position, Quaternion.identity);
     }
 
     private Transform spawnLocation()

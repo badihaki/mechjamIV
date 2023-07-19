@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 3506618994165252808}
   - component: {fileID: 6264905577085337370}
   m_Layer: 0
-  m_Name: 3
+  m_Name: The Burner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
