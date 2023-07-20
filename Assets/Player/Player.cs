@@ -139,7 +139,6 @@ public class Player : MonoBehaviour, IDamageable
         _StateMachine.ChangeState(_PilotCharacter._DeadState);
 
         _Movement.Pushback(CalculatedPushback(origin, force));
-        
     }
 
     private Vector2 CalculatedPushback(Transform origin, Vector2 force)
@@ -173,11 +172,12 @@ public class Player : MonoBehaviour, IDamageable
         else LoseGame();
     }
 
+    public void Unready() => ready = false;
+
     private void LoseGame()
     {
-        /*
-         * When we lose the game we'll send a message to the game master that this player is dead.
-         */
-        Destroy(this);
+        GameMaster.Instance._UI.TurnOffBattleUI();
+        GameMaster.Instance._UI.TurnOnWinLoseUI();
+        // Destroy(this);
     }
 }

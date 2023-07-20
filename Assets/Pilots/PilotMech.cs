@@ -13,7 +13,7 @@ public class PilotMech : MonoBehaviour
         _Pilot = pilotCharacter;
     }
 
-    public void KeepPilotInMech() => _Pilot.transform.position = _Mech.transform.position;
+    public void KeepPilotInMech() => _Pilot.transform.position = _Mech._Cockpit.position;
 
     public void GetNewMech(Mech newMech) => _Mech = newMech;
     public void DiscardMech() => _Mech = null;

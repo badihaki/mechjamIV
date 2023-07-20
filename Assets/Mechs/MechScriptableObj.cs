@@ -12,4 +12,5 @@ public class MechScriptableObj : ScriptableObject
     public Vector2 movementForce;
     public float dashPower;
     public float dashTime;
+    public int mechHealh;
 }

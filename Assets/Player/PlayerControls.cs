@@ -25,6 +25,7 @@ public class PlayerControls : MonoBehaviour
 
     public void OnAttack(InputValue value) => ProcessAttack(value.isPressed);
     private void ProcessAttack(bool input) => _AttackInput = input;
+    public void UseAttack() => _AttackInput = false;
 
     public void OnDash(InputValue value) => ProcessDash(value.isPressed);
     private void ProcessDash(bool input) => _DashInput = input;

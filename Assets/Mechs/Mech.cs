@@ -1,15 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class Mech : MonoBehaviour, IInteractable
+public class Mech : MonoBehaviour, IInteractable, IDamageable
 {
     [field: SerializeField] public MechScriptableObj _MechCharacterSheet { get; private set; }
     [field: SerializeField] public Animator _Animator { get; private set; }
     public bool _CanInteract { get; set; }
     public Transform _Cockpit { get; private set; }
     public MechLocomotion _Movement { get; private set; }
+    public Health _Health { get; private set; }
+    private Pilot activePilot;
+    [SerializeField] private GameObject sparkFX;
+    private bool isSparking;
+    [SerializeField] private GameObject smokeFX;
+    private bool isSmoking;
+    [SerializeField] private GameObject fireFX;
+    private bool onFire;
 
     // State Machine
     public PC_StateMachine _MechStateMachine { get; private set; }
@@ -18,6 +27,9 @@ public class Mech : MonoBehaviour, IInteractable
     public MechMoveState _MoveState { get; private set; }
     public MechJumpState _JumpState { get; private set; }
     public MechFallingState _FallingState { get; private set; }
+    public MechLightAttackState _LightAttackState { get; private set; }
+    public MechMediumAttackState _MediumAttackState { get; private set; }
+    public MechHeavyAttackState _HeavyAttackState { get; private set; }
 
 
     public void InteractionAccess(Pilot pilot)
@@ -47,6 +59,9 @@ public class Mech : MonoBehaviour, IInteractable
         _Animator = GetComponentInChildren<Animator>();
         _Animator.SetBool("inactive", true);
 
+        _Health = gameObject.AddComponent<Health>();
+        _Health.SetHealth(_MechCharacterSheet.mechHealh);
+
         _CanInteract = true;
     }
 
@@ -57,6 +72,9 @@ public class Mech : MonoBehaviour, IInteractable
         _MoveState = new MechMoveState(player, _MechStateMachine, "move");
         _JumpState = new MechJumpState(player, _MechStateMachine, "jump");
         _FallingState = new MechFallingState(player, _MechStateMachine, "fall");
+        _LightAttackState = new MechLightAttackState(player, _MechStateMachine, "lt-attack");
+        _MediumAttackState = new MechMediumAttackState(player, _MechStateMachine, "med-attack");
+        _HeavyAttackState = new MechHeavyAttackState(player, _MechStateMachine, "hvy-attack");
     }
 
     // Update is called once per frame
@@ -72,7 +90,9 @@ public class Mech : MonoBehaviour, IInteractable
     public void GetInTheRobot(Pilot pilot)
     {
         pilot._Player._StateMachine.ChangeState(pilot._EmbarkState);
-        
+
+        activePilot = pilot;
+
         _Animator.SetBool("inactive", false);
     }
 
@@ -83,6 +103,47 @@ public class Mech : MonoBehaviour, IInteractable
 
         _IdleState = null;
 
+        activePilot = null;
+
         _Animator.SetBool("inactive", true);
     }
+
+    public void Damage(Transform origin, Vector2 force, int damage)
+    {
+        if (!_CanInteract)
+        {
+            _Health.TakeHealth(damage);
+            if (_Health._Health < 8 && !isSparking)
+            {
+                print("sparks");
+                Instantiate(sparkFX, transform);
+                isSparking = true;
+            }
+            if(_Health._Health < 4 && !isSmoking)
+            {
+                print("smoke");
+
+                Instantiate(smokeFX, transform);
+                isSmoking = true;
+            }
+            if(_Health._Health < 1 && !onFire)
+            {
+                print("fire");
+
+                Instantiate(fireFX, transform);
+                onFire = true;
+            }
+            else if (_Health._Health <= 0) StartCoroutine(DestroyMech());
+
+        }
+    }
+
+    private IEnumerator DestroyMech()
+    {
+        yield return new WaitForSeconds(2.5f);
+        if (activePilot) activePilot._Player.Damage(transform, new Vector2(5, 5), 50);
+        Destroy(gameObject);
+    }
+
+    // end
 }

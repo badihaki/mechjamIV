@@ -17,3 +17,4 @@ MonoBehaviour:
   movementForce: {x: 7.5, y: 15}
   dashPower: 10
   dashTime: 3.5
+  mechHealh: 10

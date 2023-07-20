@@ -10,6 +10,7 @@ public class MechMoveState : PC_State
 
     Vector2 moveInput;
     bool jumpInput;
+    bool attackInput;
 
     public override void Enter()
     {
@@ -31,6 +32,7 @@ public class MechMoveState : PC_State
 
         moveInput = _Player._Controls._MoveInput;
         jumpInput = _Player._Controls._JumpInput;
+        attackInput = _Player._Controls._AttackInput;
     }
 
     public override void PhysicsUpdate()
@@ -51,6 +53,7 @@ public class MechMoveState : PC_State
 
         if (moveInput.x == 0) _StateMachine.ChangeState(_Player._MechController._Mech._IdleState);
         if (jumpInput) _StateMachine.ChangeState(_Player._MechController._Mech._JumpState);
+        if (attackInput) _StateMachine.ChangeState(_Player._MechController._Mech._LightAttackState);
         if (!_Player._MechController._Mech._Movement._CheckGrounded.IsGrounded()) _StateMachine.ChangeState(_Player._MechController._Mech._FallingState);
     }
 

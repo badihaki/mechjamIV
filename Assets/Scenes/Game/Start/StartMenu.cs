@@ -32,9 +32,9 @@ public class StartMenu : MonoBehaviour
         eventSystem.firstSelectedGameObject = GameObject.Find("Start Button");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void Start2P() => GameMaster.Instance._SceneManager.ChangeScene("characterSelect");
+
+    public void QuitGame()=> Application.Quit();
+
+    // end
 }

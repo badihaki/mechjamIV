@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UI_Controller : MonoBehaviour
 {
@@ -21,7 +23,6 @@ public class UI_Controller : MonoBehaviour
 
         winLoseObj = Instantiate(winLoseObj, GameMaster.Instance.transform);
         _WinLoseUI = winLoseObj.GetComponent<MatchFinishUI>();
-        _WinLoseUI.Initialize();
         winLoseObj.SetActive(false);
         // initalize other ui
     }
@@ -32,10 +33,17 @@ public class UI_Controller : MonoBehaviour
         if(!battleUIObj.activeInHierarchy) battleUIObj.SetActive(true);
         // battleUIObj?.SetActive(true);
     }
+    public void TurnOffBattleUI()
+    {
+        battleUIObj.SetActive(false);
+    }
     public void TurnOnWinLoseUI()
     {
         if (!winLoseObj.activeInHierarchy) winLoseObj.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_WinLoseUI.GetComponentInChildren<Button>().gameObject);
+        GameMaster.Instance._PlayerManager.UnreadyAllPlayers();
     }
+    public void TurnOffWinLoseUI() => winLoseObj?.SetActive(false);
         
 
     // end

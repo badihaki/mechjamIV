@@ -10,6 +10,20 @@ public class MechFallingState : PC_State
 
     Vector2 moveInput;
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        _Player._MechController._Mech._Animator.SetBool(_AnimationName, true);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        _Player._MechController._Mech._Animator.SetBool(_AnimationName, false);
+    }
+
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();

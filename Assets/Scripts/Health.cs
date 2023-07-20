@@ -12,5 +12,6 @@ public class Health : MonoBehaviour
     public void SetHealth(int hp = 1) => _Health = hp;
     public void SetLives() => _Lives = GameMaster.Instance._MatchSettings.playerLives;
 
-    internal void TakeALife() => _Lives--;
+    public void TakeALife() => _Lives--;
+    public void TakeHealth(int health) => _Health -= health;
 }

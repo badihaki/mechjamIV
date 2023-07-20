@@ -47,4 +47,24 @@ public class GM_PlayerManager : MonoBehaviour
             GameMaster.Instance._UI._BattleUI.AddPlayer(_PlayerList[playerIndex]);
         }
     }
+
+    public void DestroyAllPlayersInScene()
+    {
+        for (int playerIndex = 0; playerIndex < _PlayerList.Count; playerIndex++)
+        {
+            //if (_PlayerList[playerIndex]._PilotCharacter!=null)
+            Destroy(_PlayerList[playerIndex].gameObject);
+        }
+        _PlayerList.Clear();
+        _PlayerSpawnPoints.Clear();
+    }
+
+    public void UnreadyAllPlayers()
+    {
+        for (int playerIndex = 0; playerIndex < _PlayerList.Count; playerIndex++)
+        {
+            //if (_PlayerList[playerIndex]._PilotCharacter!=null)
+            _PlayerList[playerIndex].Unready();
+        }
+    }
 }

@@ -34,25 +34,27 @@ public class RichPeople : MonoBehaviour
         spawnTimer = addTime;
 
         int chooseWhatSpawns = UnityEngine.Random.Range(1, 100);
-        if (chooseWhatSpawns <= 50) SpawnMech();
+        print("what spawns is at " + chooseWhatSpawns);
+        
+        if (chooseWhatSpawns >= 85) SpawnMech();
         else SpawnWeapon();
     }
 
     private void SpawnWeapon()
     {
-        Mech newMech = Instantiate(_MechsToSpawn[UnityEngine.Random.Range(0, _MechsToSpawn.Count - 1)], spawnLocation().position, Quaternion.identity);
+        GameObject newWeaponPickup = Instantiate(_WeaponsToSpawn[UnityEngine.Random.Range(0, _WeaponsToSpawn.Count - 1)].weaponPickup, spawnLocation().position, Quaternion.identity);
     }
 
     private void SpawnMech()
     {
-        GameObject newWeaponPickup = Instantiate(_WeaponsToSpawn[UnityEngine.Random.Range(0, _WeaponsToSpawn.Count - 1)].weaponPickup, spawnLocation().position, Quaternion.identity);
+        Mech newMech = Instantiate(_MechsToSpawn[UnityEngine.Random.Range(0, _MechsToSpawn.Count - 1)], spawnLocation().position, Quaternion.identity);
+        print("spawning a mech");
     }
 
     private Transform spawnLocation()
     {
         int locationIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
         Transform spawnLocation = spawnPoints[locationIndex];
-        print("which spawn point? = " + spawnLocation.name);
         return spawnLocation;
     }
 }

@@ -153,7 +153,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 1.5, y: 2.8}
   m_EdgeRadius: 0
 --- !u!1 &381773021532239640
 GameObject:
@@ -1104,6 +1104,9 @@ MonoBehaviour:
   <_MechCharacterSheet>k__BackingField: {fileID: 11400000, guid: 9cd687d2cb9034a4690daa2deb42e258,
     type: 2}
   <_Animator>k__BackingField: {fileID: 0}
+  sparkFX: {fileID: 5937778879377016870, guid: 4eacf886d4378034a80e63ab6e41af27, type: 3}
+  smokeFX: {fileID: 8463593888252697824, guid: fb28066f21594a04395d3960c83c86c9, type: 3}
+  fireFX: {fileID: 6983071123630911472, guid: 87bbe192d47a08646b9f0ab9df743173, type: 3}
 --- !u!1 &6615303947181870159
 GameObject:
   m_ObjectHideFlags: 0
