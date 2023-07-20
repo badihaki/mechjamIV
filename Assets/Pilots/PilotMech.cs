@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PilotMech : MonoBehaviour
 {
-    public Pilot _Pilot { get; private set; }
-    public Mech _Mech;
+    [field: SerializeField] public Pilot _Pilot { get; private set; }
+    [field: SerializeField] public Mech _Mech { get; private set; }
 
     public void Initialize(Pilot pilotCharacter)
     {

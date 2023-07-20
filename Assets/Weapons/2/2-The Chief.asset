@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponGameObj: {fileID: 6927009064636835659, guid: 55e986dbf4966a54eb20f376168c29ff,
     type: 3}
-  projectile: {fileID: 3137762490849864100, guid: f1b2ca57c75857f4ea1b2396d9211a87,
+  projectile: {fileID: 3137762490849864100, guid: a07af77b80b9e4141b1a241167e4223d,
     type: 3}
   projectileFireRate: 0.221
   projectileSpeed: 8.75
@@ -24,4 +24,4 @@ MonoBehaviour:
   weaponPickup: {fileID: 5383296913225223935, guid: d6c25760b56ed6145843626081b8d0c2,
     type: 3}
   maxAmmo: 18
-  weaponReloadTime: 1.75
+  weaponReloadTime: 2.15

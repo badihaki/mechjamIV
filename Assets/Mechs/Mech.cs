@@ -6,6 +6,7 @@ using UnityEngine;
 public class Mech : MonoBehaviour, IInteractable
 {
     [field: SerializeField] public MechScriptableObj _MechCharacterSheet { get; private set; }
+    [field: SerializeField] public Animator _Animator { get; private set; }
     public bool _CanInteract { get; set; }
     public Transform _Cockpit { get; private set; }
     public MechLocomotion _Movement { get; private set; }
@@ -15,6 +16,8 @@ public class Mech : MonoBehaviour, IInteractable
     public MechInactiveState _InactiveState { get; private set; }
     public MechIdleState _IdleState { get; private set; }
     public MechMoveState _MoveState { get; private set; }
+    public MechJumpState _JumpState { get; private set; }
+    public MechFallingState _FallingState { get; private set; }
 
 
     public void InteractionAccess(Pilot pilot)
@@ -40,7 +43,10 @@ public class Mech : MonoBehaviour, IInteractable
         _Movement.Initialize(this);
         
         _MechStateMachine = new PC_StateMachine();
-        
+
+        _Animator = GetComponentInChildren<Animator>();
+        _Animator.SetBool("inactive", true);
+
         _CanInteract = true;
     }
 
@@ -49,6 +55,8 @@ public class Mech : MonoBehaviour, IInteractable
         _InactiveState = new MechInactiveState(player, _MechStateMachine, "inactive");
         _IdleState = new MechIdleState(player, _MechStateMachine, "idle");
         _MoveState = new MechMoveState(player, _MechStateMachine, "move");
+        _JumpState = new MechJumpState(player, _MechStateMachine, "jump");
+        _FallingState = new MechFallingState(player, _MechStateMachine, "fall");
     }
 
     // Update is called once per frame
@@ -64,6 +72,8 @@ public class Mech : MonoBehaviour, IInteractable
     public void GetInTheRobot(Pilot pilot)
     {
         pilot._Player._StateMachine.ChangeState(pilot._EmbarkState);
+        
+        _Animator.SetBool("inactive", false);
     }
 
     public void GetOutTheRobot()
@@ -72,5 +82,7 @@ public class Mech : MonoBehaviour, IInteractable
         _CanInteract = true;
 
         _IdleState = null;
+
+        _Animator.SetBool("inactive", true);
     }
 }

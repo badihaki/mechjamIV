@@ -10,12 +10,8 @@ public class MechInactiveState : PC_State
 
     public override void Enter()
     {
-        // Debug.Log("player: " + _Player);
-        // Debug.Log("mech: " + _Player._MechController._Mech);
-
         if (_Player) FullWipe();
     }
-
     public override void CheckGround()
     {
     }

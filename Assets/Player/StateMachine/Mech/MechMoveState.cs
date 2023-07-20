@@ -9,12 +9,20 @@ public class MechMoveState : PC_State
     }
 
     Vector2 moveInput;
+    bool jumpInput;
 
     public override void Enter()
     {
         base.Enter();
 
-        Debug.Log("enter mech move state");
+        _Player._MechController._Mech._Animator.SetBool(_AnimationName, true);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        _Player._MechController._Mech._Animator.SetBool(_AnimationName, false);
     }
 
     public override void CheckInputs()
@@ -22,6 +30,7 @@ public class MechMoveState : PC_State
         base.CheckInputs();
 
         moveInput = _Player._Controls._MoveInput;
+        jumpInput = _Player._Controls._JumpInput;
     }
 
     public override void PhysicsUpdate()
@@ -41,6 +50,8 @@ public class MechMoveState : PC_State
         base.CheckTransitions();
 
         if (moveInput.x == 0) _StateMachine.ChangeState(_Player._MechController._Mech._IdleState);
+        if (jumpInput) _StateMachine.ChangeState(_Player._MechController._Mech._JumpState);
+        if (!_Player._MechController._Mech._Movement._CheckGrounded.IsGrounded()) _StateMachine.ChangeState(_Player._MechController._Mech._FallingState);
     }
 
     // end

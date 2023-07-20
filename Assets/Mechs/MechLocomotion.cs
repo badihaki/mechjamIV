@@ -49,6 +49,11 @@ public class MechLocomotion : MonoBehaviour
         else if (direction < 0 && _IsFacingRight) Flip();
     }
 
+    public void JumpCharacter()
+    {
+        _PhysicsController.AddForce(new Vector2(_PhysicsController.velocity.x / 2, mech._MechCharacterSheet.movementForce.y), ForceMode2D.Impulse);
+    }
+
     private void Flip()
     {
         transform.Rotate(0.0f, 180.0f, 0.0f);
