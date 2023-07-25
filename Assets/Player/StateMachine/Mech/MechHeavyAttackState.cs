@@ -14,6 +14,7 @@ public class MechHeavyAttackState : PC_State
 
         _Player._MechController._Mech._Animator.SetBool(_AnimationName, true);
         _Player._Controls.UseAttack();
+        _Player._MechController._Mech.SetDamage(2, 8.25f);
     }
     public override void Exit()
     {
@@ -27,5 +28,6 @@ public class MechHeavyAttackState : PC_State
         base.CheckTransitions();
 
         if (Time.time > _StateStartTime + 0.65f) _StateMachine.ChangeState(_Player._MechController._Mech._IdleState);
+        _Player._MechController._Mech.ResetDamage();
     }
 }

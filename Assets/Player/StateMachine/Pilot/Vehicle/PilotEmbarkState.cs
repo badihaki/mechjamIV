@@ -16,6 +16,7 @@ public class PilotEmbarkState : PC_State
         _Player._Movement.StopMovement();
         _Player._Movement._PhysicsController.bodyType = RigidbodyType2D.Kinematic;
         _Player._PilotCharacter._Body.SetActive(false);
+        _Player._PilotCharacter.transform.Find("Hurtbox").gameObject.SetActive(false);
     }
 
     public override void LogicUpdate()

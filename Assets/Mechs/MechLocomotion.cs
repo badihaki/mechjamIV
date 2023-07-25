@@ -30,7 +30,7 @@ public class MechLocomotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StopMovement()
@@ -52,6 +52,18 @@ public class MechLocomotion : MonoBehaviour
     public void JumpCharacter()
     {
         _PhysicsController.AddForce(new Vector2(_PhysicsController.velocity.x / 2, mech._MechCharacterSheet.movementForce.y), ForceMode2D.Impulse);
+    }
+
+    public void ApplyPushback(Transform fromWhere, Vector2 amountOfForce)
+    {
+        Vector2 force = new Vector2(amountOfForce.x * CalculatePushbackDirection(fromWhere), amountOfForce.y);
+        _PhysicsController.AddForce(force, ForceMode2D.Impulse);
+    }
+
+    public int CalculatePushbackDirection(Transform fromWhere)
+    {
+        if (fromWhere.position.x > transform.position.x) return -1;
+        return 1;
     }
 
     private void Flip()

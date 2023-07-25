@@ -46,6 +46,8 @@ public class GameMaster : MonoBehaviour
 
                 _SceneManager = GetComponent<GM_SceneManager>();
 
+                BuildStateMachine();
+
                 ready = true;
             }
             playerInputManager.DisableJoining();
@@ -54,7 +56,6 @@ public class GameMaster : MonoBehaviour
 
     private void Start()
     {
-        BuildStateMachine();
     }
 
     private void BuildStateMachine()

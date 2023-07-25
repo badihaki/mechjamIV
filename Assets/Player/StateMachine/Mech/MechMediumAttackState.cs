@@ -16,12 +16,14 @@ public class MechMediumAttackState : PC_State
 
         _Player._MechController._Mech._Animator.SetBool(_AnimationName, true);
         _Player._Controls.UseAttack();
+        _Player._MechController._Mech.SetDamage(1, 4.85f);
     }
     public override void Exit()
     {
         base.Exit();
 
         _Player._MechController._Mech._Animator.SetBool(_AnimationName, false);
+        _Player._MechController._Mech.ResetDamage();
     }
 
     public override void CheckInputs()

@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2495068858958388810}
   - component: {fileID: 626344381126061185}
-  - component: {fileID: 9217051829269276091}
+  - component: {fileID: 3616513008907720535}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -110,8 +110,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.35, y: 3}
   m_EdgeRadius: 0
---- !u!61 &9217051829269276091
-BoxCollider2D:
+--- !u!70 &3616513008907720535
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -143,18 +143,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 2.8}
-  m_EdgeRadius: 0
+  m_Size: {x: 1, y: 3}
+  m_Direction: 0
 --- !u!1 &381773021532239640
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4207855800309263525}
   - component: {fileID: 3057505528201596539}
+  - component: {fileID: 1939574709977492766}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -264,6 +255,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &1939574709977492766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481160300560319015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da40aabed3d6b7e48a22ecefa93c52bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllingMech: {fileID: 5113043962272166138}
 --- !u!1 &502133449885567210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,6 +1111,8 @@ MonoBehaviour:
   sparkFX: {fileID: 5937778879377016870, guid: 4eacf886d4378034a80e63ab6e41af27, type: 3}
   smokeFX: {fileID: 8463593888252697824, guid: fb28066f21594a04395d3960c83c86c9, type: 3}
   fireFX: {fileID: 6983071123630911472, guid: 87bbe192d47a08646b9f0ab9df743173, type: 3}
+  <_Damage>k__BackingField: 0
+  <_Force>k__BackingField: {x: 0, y: 0}
 --- !u!1 &6615303947181870159
 GameObject:
   m_ObjectHideFlags: 0

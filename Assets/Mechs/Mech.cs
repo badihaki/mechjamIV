@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Mech : MonoBehaviour, IInteractable, IDamageable
@@ -13,12 +12,18 @@ public class Mech : MonoBehaviour, IInteractable, IDamageable
     public MechLocomotion _Movement { get; private set; }
     public Health _Health { get; private set; }
     private Pilot activePilot;
+    
+    // effects
     [SerializeField] private GameObject sparkFX;
     private bool isSparking;
     [SerializeField] private GameObject smokeFX;
     private bool isSmoking;
     [SerializeField] private GameObject fireFX;
     private bool onFire;
+
+    // stats
+    [field: SerializeField] public int _Damage { get; private set; }
+    [field: SerializeField] public Vector2 _Force { get; private set; }
 
     // State Machine
     public PC_StateMachine _MechStateMachine { get; private set; }
@@ -108,11 +113,25 @@ public class Mech : MonoBehaviour, IInteractable, IDamageable
         _Animator.SetBool("inactive", true);
     }
 
+    public void SetDamage(int damage, float force)
+    {
+        _Damage = damage;
+        _Force = new Vector2(force, force);
+    }
+
+    public void ResetDamage()
+    {
+        _Damage = 0;
+        _Force = Vector2.zero;
+    }
+
     public void Damage(Transform origin, Vector2 force, int damage)
     {
         if (!_CanInteract)
         {
             _Health.TakeHealth(damage);
+            _Movement.ApplyPushback(origin, force);
+            
             if (_Health._Health < 8 && !isSparking)
             {
                 print("sparks");
@@ -134,7 +153,6 @@ public class Mech : MonoBehaviour, IInteractable, IDamageable
                 onFire = true;
             }
             else if (_Health._Health <= 0) StartCoroutine(DestroyMech());
-
         }
     }
 

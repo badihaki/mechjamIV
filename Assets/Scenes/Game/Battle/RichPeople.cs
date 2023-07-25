@@ -14,21 +14,31 @@ public class RichPeople : MonoBehaviour
     [SerializeField]private float spawnTimer;
     [SerializeField] private float minSpawnAddTime = 10.0f;
     [SerializeField]private float maxSpawnAddTime = 25.0f;
+    bool firstSpawnIsComplete = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnTimer = UnityEngine.Random.Range(minSpawnAddTime, maxSpawnAddTime);
+        firstSpawnIsComplete = false;
+        spawnTimer = 5.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         spawnTimer -= Time.deltaTime;
-        if (spawnTimer <= 0) SpawnItem();
+        if (spawnTimer <= 0)
+        {
+            if (!firstSpawnIsComplete)
+            {
+                firstSpawnIsComplete = true;
+                SpawnMech();
+            }
+            else SpawnItem();
+        }
     }
 
-    private void SpawnItem()
+        private void SpawnItem()
     {
         float addTime = UnityEngine.Random.Range(minSpawnAddTime, maxSpawnAddTime);
         spawnTimer = addTime;

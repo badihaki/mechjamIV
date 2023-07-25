@@ -23,6 +23,7 @@ public class PilotDisembarkState : PC_State
         base.Exit();
 
         _Player._PilotCharacter._Body.SetActive(true);
+        _Player._PilotCharacter.transform.Find("Hurtbox").gameObject.SetActive(true);
     }
 
     public override void LogicUpdate()
