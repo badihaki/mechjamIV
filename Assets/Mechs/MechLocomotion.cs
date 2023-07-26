@@ -56,7 +56,7 @@ public class MechLocomotion : MonoBehaviour
 
     public void ApplyPushback(Transform fromWhere, Vector2 amountOfForce)
     {
-        Vector2 force = new Vector2(amountOfForce.x * CalculatePushbackDirection(fromWhere), amountOfForce.y);
+        Vector2 force = new Vector2((amountOfForce.x * 1.53f) * CalculatePushbackDirection(fromWhere), amountOfForce.y * 1.175f);
         _PhysicsController.AddForce(force, ForceMode2D.Impulse);
     }
 

@@ -35,6 +35,8 @@ public class Mech : MonoBehaviour, IInteractable, IDamageable
     public MechLightAttackState _LightAttackState { get; private set; }
     public MechMediumAttackState _MediumAttackState { get; private set; }
     public MechHeavyAttackState _HeavyAttackState { get; private set; }
+    public MechHitState _HitState { get; private set; }
+    public MechDeadState _DeadState { get; private set; }
 
 
     public void InteractionAccess(Pilot pilot)
@@ -80,6 +82,8 @@ public class Mech : MonoBehaviour, IInteractable, IDamageable
         _LightAttackState = new MechLightAttackState(player, _MechStateMachine, "lt-attack");
         _MediumAttackState = new MechMediumAttackState(player, _MechStateMachine, "med-attack");
         _HeavyAttackState = new MechHeavyAttackState(player, _MechStateMachine, "hvy-attack");
+        _HitState = new MechHitState(player, _MechStateMachine, "hit");
+        _DeadState = new MechDeadState(player, _MechStateMachine, "dead");
     }
 
     // Update is called once per frame
@@ -113,13 +117,13 @@ public class Mech : MonoBehaviour, IInteractable, IDamageable
         _Animator.SetBool("inactive", true);
     }
 
-    public void SetDamage(int damage, float force)
+    public void SetDamageToDeal(int damage, float force)
     {
         _Damage = damage;
         _Force = new Vector2(force, force);
     }
 
-    public void ResetDamage()
+    public void ResetDamageDealt()
     {
         _Damage = 0;
         _Force = Vector2.zero;
@@ -131,6 +135,7 @@ public class Mech : MonoBehaviour, IInteractable, IDamageable
         {
             _Health.TakeHealth(damage);
             _Movement.ApplyPushback(origin, force);
+            _MechStateMachine.ChangeState(_HitState);
             
             if (_Health._Health < 8 && !isSparking)
             {
@@ -158,6 +163,7 @@ public class Mech : MonoBehaviour, IInteractable, IDamageable
 
     private IEnumerator DestroyMech()
     {
+        _MechStateMachine.ChangeState(_DeadState);
         yield return new WaitForSeconds(2.5f);
         if (activePilot) activePilot._Player.Damage(transform, new Vector2(5, 5), 50);
         Destroy(gameObject);

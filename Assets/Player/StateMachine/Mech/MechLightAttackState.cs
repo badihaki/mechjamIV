@@ -17,7 +17,7 @@ public class MechLightAttackState : PC_State
         _Player._MechController._Mech._Movement.StopMovement();
         _Player._MechController._Mech._Animator.SetBool(_AnimationName, true);
         _Player._Controls.UseAttack();
-        _Player._MechController._Mech.SetDamage(1, 3.5f);
+        _Player._MechController._Mech.SetDamageToDeal(1, 3.5f);
     }
 
     public override void CheckInputs()
@@ -39,6 +39,6 @@ public class MechLightAttackState : PC_State
         base.Exit();
 
         _Player._MechController._Mech._Animator.SetBool(_AnimationName, false);
-        _Player._MechController._Mech.ResetDamage();
+        _Player._MechController._Mech.ResetDamageDealt();
     }
 }
